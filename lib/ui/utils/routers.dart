@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geinterra_apps/ui/login/login_page.dart';
+import 'package:geinterra_apps/ui/login/login_screen.dart';
 
 MaterialPageRoute? configRouters(RouteSettings settings) {
   switch (settings.name) {
