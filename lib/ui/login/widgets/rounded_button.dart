@@ -15,8 +15,9 @@ class RoundedButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       width: size.width * 0.8,
+      height: size.height * 0.06,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(15),
         child: newElevatedButton(),
       ),
     );
@@ -25,17 +26,10 @@ class RoundedButton extends StatelessWidget {
   Widget newElevatedButton() {
     return ElevatedButton(
       onPressed: press,
-      style: ElevatedButton.styleFrom(
-          primary: Color(0xff297061),
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-          textStyle: TextStyle(
-              letterSpacing: 2,
-              color: textColor,
-              fontSize: 12,
-              fontFamily: 'Poppins')),
+      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff297061)),
       child: Text(
         text,
-        style: TextStyle(color: textColor, fontSize: 17),
+        style: TextStyle(color: textColor, fontSize: 14, fontFamily: 'Poppins'),
       ),
     );
   }
