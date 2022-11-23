@@ -23,7 +23,7 @@ class PageTitleBar extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: const TextStyle(
-                fontFamily: 'Poppins', fontSize: 20, color: Color(0xff297061)),
+                fontFamily: 'Poppins', fontSize: 20, color: Colors.black),
           ),
         ),
       ),
