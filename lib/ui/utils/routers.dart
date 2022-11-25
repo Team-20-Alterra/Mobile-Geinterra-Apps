@@ -6,6 +6,8 @@ MaterialPageRoute? configRouters(RouteSettings settings) {
   switch (settings.name) {
     case RegisterPage.routeName:
       return MaterialPageRoute(builder: (_) => const RegisterPage());
+    case LoginPage.routeName:
+      return MaterialPageRoute(builder: (_) => const LoginPage());
   }
   assert(false, 'Need to implement ${settings.name}');
   return null;
