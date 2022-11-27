@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:geinterra_apps/ui/login/login_screen.dart';
+import 'package:geinterra_apps/ui/profile/ubah_akun_page.dart';
 
 class ProfilePage extends StatefulWidget {
+  static const routeName = '/profilpage';
   const ProfilePage({super.key});
 
   @override
@@ -100,10 +103,16 @@ class _ProfilePageState extends State<ProfilePage> {
                             color: Colors.black,
                           ),
                           title: Text(
-                            'ubah data akun',
+                            'Ubah data akun',
                             style: TextStyle(fontSize: 12, color: Colors.black),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const UbahAkunPage()),
+                            );
+                          },
                         )
                       ],
                     ),
@@ -156,22 +165,23 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: TextStyle(fontSize: 12, color: Colors.black),
                           ),
                           onTap: () {},
-                        )
+                        ),
+                        ListTile(
+                          leading: Icon(
+                            Icons.logout_outlined,
+                            color: Colors.red,
+                          ),
+                          title: Text(
+                            'Keluar akun',
+                            style: TextStyle(fontSize: 12, color: Colors.red),
+                          ),
+                          onTap: () {
+                            Navigator.pushNamed(context, LoginPage.routeName1);
+                          },
+                        ),
                       ],
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff297061)),
-                    child: Text(
-                      'Keluar',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontFamily: 'Poppins'),
-                    ),
-                  )
                 ])));
   }
 }

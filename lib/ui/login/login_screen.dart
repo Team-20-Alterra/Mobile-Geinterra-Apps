@@ -8,7 +8,7 @@ import 'components/under_part.dart';
 import 'components/upside.dart';
 
 class LoginPage extends StatefulWidget {
-  static const routeName = '/loginpage';
+  static const routeName1 = '/loginpage';
   const LoginPage({Key? key}) : super(key: key);
 
   @override
