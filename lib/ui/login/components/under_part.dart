@@ -19,13 +19,10 @@ class UnderPart extends StatelessWidget {
         Text(
           title,
           style: const TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 13,
-              color: Colors.grey,
-              fontWeight: FontWeight.w600),
+              fontSize: 13, color: Colors.black, fontWeight: FontWeight.w400),
         ),
         const SizedBox(
-          width: 20,
+          width: 10,
         ),
         InkWell(
           onTap: () {
@@ -34,10 +31,10 @@ class UnderPart extends StatelessWidget {
           child: Text(
             navigatorText,
             style: const TextStyle(
-                color: Color(0xfff1bb274),
+                color: Colors.black,
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                fontFamily: 'Opensans'),
+                fontFamily: 'Poppins'),
           ),
         )
       ],

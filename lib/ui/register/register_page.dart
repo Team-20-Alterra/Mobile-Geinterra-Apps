@@ -1,12 +1,13 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../login/login_screen.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:geinterra_apps/theme.dart';
+import 'package:geinterra_apps/ui/login/login_screen.dart';
+import 'package:geinterra_apps/ui/register/screens/kebijakan_screen.dart';
+import 'package:geinterra_apps/ui/register/screens/syarat_screen.dart';
+import 'package:geinterra_apps/ui/register/widget/custom_checkbox.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = '/registerpage';
-
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
@@ -15,12 +16,15 @@ class RegisterPage extends StatefulWidget {
 
 class _LoginScreenState extends State<RegisterPage> {
   final formKey = GlobalKey<FormState>();
-  bool _toogle = true;
 
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  bool passwordVisible = false;
+  bool passwordConfrimationVisible = false;
+  bool isChecked = false;
 
   @override
   void dispose() {
@@ -32,26 +36,31 @@ class _LoginScreenState extends State<RegisterPage> {
   }
 
   @override
+  void togglePassword() {
+    setState(() {
+      passwordVisible = !passwordVisible;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff297061),
+      backgroundColor: Color.fromARGB(255, 242, 242, 242),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Icon(
             Icons.account_circle_outlined,
             size: 160.0,
-            color: Colors.white,
           ),
           SizedBox(
             height: 20.0,
           ),
           Container(
-            // height: 600,
-            // margin: EdgeInsets.only(top: 310),
             decoration: BoxDecoration(
               color: Colors.white,
+              border: Border.all(color: Colors.black),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(50.0),
                 topRight: Radius.circular(50.0),
@@ -73,11 +82,7 @@ class _LoginScreenState extends State<RegisterPage> {
                           children: [
                             Text(
                               'Buat Akun',
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0,
-                                color: Color(0xff297061),
-                              ),
+                              style: heading6.copyWith(),
                             ),
                           ],
                         ),
@@ -85,11 +90,11 @@ class _LoginScreenState extends State<RegisterPage> {
                       TextFormField(
                         controller: _nameController,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.account_circle_rounded),
+                          prefixIcon: Icon(Icons.person_outlined),
                           labelText: 'Nama Lengkap',
-                          labelStyle: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w500,
-                          ),
+                          hintText: 'Budi',
+                          labelStyle: medium12pt.copyWith(color: textBlack),
+                          hintStyle: medium12pt.copyWith(color: textBlack),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))),
@@ -108,11 +113,11 @@ class _LoginScreenState extends State<RegisterPage> {
                       TextFormField(
                         controller: _phoneController,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.phone_android),
-                          labelText: 'Phone Number',
-                          labelStyle: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w500,
-                          ),
+                          prefixIcon: Icon(Icons.call_outlined),
+                          labelText: 'Nomor Telepon',
+                          hintText: '0812345678',
+                          labelStyle: medium12pt.copyWith(color: textBlack),
+                          hintStyle: medium12pt.copyWith(color: textBlack),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))),
@@ -131,11 +136,11 @@ class _LoginScreenState extends State<RegisterPage> {
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.email_rounded),
+                          prefixIcon: Icon(Icons.alternate_email_outlined),
                           labelText: 'Email',
-                          labelStyle: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w500,
-                          ),
+                          hintText: 'email@salah.com',
+                          labelStyle: medium12pt.copyWith(color: textBlack),
+                          hintStyle: medium12pt.copyWith(color: textBlack),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))),
@@ -154,23 +159,19 @@ class _LoginScreenState extends State<RegisterPage> {
                       ),
                       TextFormField(
                         controller: _passwordController,
-                        obscureText: _toogle,
+                        obscureText: !passwordVisible,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.password_rounded),
+                          prefixIcon: Icon(Icons.lock_outline),
                           suffixIcon: IconButton(
-                            onPressed: () {
-                              _toogle;
-                            },
-                            icon: Icon(_toogle
-                                ? Icons.visibility_off
-                                : Icons.visibility),
+                            icon: Icon(passwordVisible
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined),
+                            onPressed: togglePassword,
                           ),
                           labelText: 'Password',
-                          labelStyle: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w500,
-                          ),
-                          hintStyle:
-                              TextStyle(color: Colors.black.withOpacity(0.3)),
+                          hintText: '*****',
+                          labelStyle: medium12pt.copyWith(color: textBlack),
+                          hintStyle: medium12pt.copyWith(color: textBlack),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))),
@@ -183,13 +184,81 @@ class _LoginScreenState extends State<RegisterPage> {
                         },
                       ),
                       SizedBox(
-                        height: 15.0,
+                        height: 32,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CustomCheckbox(),
+                          SizedBox(
+                            width: 12,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    'Saya menyetujui',
+                                    style:
+                                        regular14pt.copyWith(color: textBlack),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SyaratScreen()));
+                                    },
+                                    child: Text(
+                                      'syarat dan ketentuan',
+                                      style: bold.copyWith(color: textBlue),
+                                    ),
+                                  ),
+                                  Text(
+                                    'dan',
+                                    style:
+                                        regular14pt.copyWith(color: textBlack),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  KebijakanScreen()));
+                                    },
+                                    child: Text(
+                                      'kebijakan privasi',
+                                      style: bold.copyWith(color: textBlue),
+                                    ),
+                                  ),
+                                  Text(
+                                    'dan',
+                                    style:
+                                        regular14pt.copyWith(color: textBlack),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                'bersedia menerima informasi dari Ginap',
+                                style: regular14pt.copyWith(color: textBlack),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 32.0,
                       ),
                       ElevatedButton(
                         onPressed: () {
                           final isValidForm = formKey.currentState!.validate();
                           String username = _nameController.text;
                           String email = _emailController.text;
+                          String telepon = _phoneController.text;
+                          String password = _passwordController.text;
 
                           if (isValidForm) {
                             Navigator.pushAndRemoveUntil(
@@ -198,6 +267,15 @@ class _LoginScreenState extends State<RegisterPage> {
                                 builder: (context) => LoginPage(),
                               ),
                               (route) => false,
+                            );
+                          } else if (isChecked = !isChecked) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: primaryGreen,
+                                content: Text(
+                                  'Are you agree with our Tems & Conditions?',
+                                ),
+                              ),
                             );
                           }
                         },
@@ -210,10 +288,7 @@ class _LoginScreenState extends State<RegisterPage> {
                               Radius.circular(12),
                             ),
                           ),
-                          textStyle: GoogleFonts.poppins(
-                            fontSize: 14.0,
-                          ),
-                          side: BorderSide(color: Colors.white),
+                          textStyle: semibold12pt.copyWith(color: textWhite),
                         ),
                       ),
                       Padding(
@@ -223,19 +298,19 @@ class _LoginScreenState extends State<RegisterPage> {
                           children: [
                             Text(
                               'Sudah punya akun?',
-                              style: GoogleFonts.poppins(
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w500,
-                              ),
+                              style: regular12pt.copyWith(color: textBlack),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginPage()));
+                              },
                               child: Text(
                                 'Masuk',
-                                style: GoogleFonts.poppins(
-                                    color: Color(0xff297061),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14.0),
+                                style: semibold12pt.copyWith(color: textBlack),
                               ),
                             ),
                           ],

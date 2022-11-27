@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geinterra_apps/ui/login/widgets/rounded_button.dart';
 import 'package:geinterra_apps/ui/login/widgets/text_field_container.dart';
+import 'package:geinterra_apps/ui/register/register_page.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 import 'components/page_title_bar.dart';
 import 'components/under_part.dart';
@@ -57,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(
-                          height: 15,
+                          height: 5,
                         ),
                         Form(
                           key: _formKey,
@@ -69,16 +70,18 @@ class _LoginPageState extends State<LoginPage> {
                                   cursorColor: const Color(0xff297061),
                                   decoration: const InputDecoration(
                                       icon: Icon(
-                                        Icons.person,
-                                        color: Color(0xff297061),
+                                        Icons.email_outlined,
+                                        color: Colors.black,
                                       ),
-                                      hintText: 'Email',
+                                      hintText: 'email@salah.com',
                                       hintStyle:
                                           TextStyle(fontFamily: 'Poppins'),
                                       border: InputBorder.none),
                                   validator: Validators.compose([
-                                    Validators.required('email is required'),
-                                    Validators.email('invalid email address')
+                                    Validators.required(
+                                        'email tidak boleh kosong'),
+                                    Validators.email(
+                                        'Mohon masukkan email yang valid')
                                   ]),
                                 ),
                               ),
@@ -89,12 +92,13 @@ class _LoginPageState extends State<LoginPage> {
                                   cursorColor: Color(0xff297061),
                                   decoration: InputDecoration(
                                       icon: const Icon(
-                                        Icons.lock,
-                                        color: Color(0xff297061),
+                                        Icons.lock_outline,
+                                        color: Colors.black,
                                       ),
-                                      hintText: "Password",
+                                      hintText: "pass_salah",
                                       hintStyle: const TextStyle(
-                                          fontFamily: 'Poppins'),
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w700),
                                       suffixIcon: IconButton(
                                         icon: Icon(
                                           _passwordInVisible
@@ -111,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                       border: InputBorder.none),
                                   validator: Validators.compose([
-                                    Validators.required('password is required')
+                                    Validators.required('password is required'),
                                   ]),
                                 ),
                               ),
@@ -131,13 +135,20 @@ class _LoginPageState extends State<LoginPage> {
                                                     'Lupa kata sandi?',
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
-                                                        fontFamily: 'Poppins'),
+                                                      fontFamily: 'Poppins',
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 10,
                                                   ),
                                                   const Text(
                                                     'Masukkan email untuk mengirimkan tautan pengganti sandi',
                                                     style:
-                                                        TextStyle(fontSize: 12),
+                                                        TextStyle(fontSize: 14),
                                                     textAlign: TextAlign.center,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 10,
                                                   ),
                                                   TextFieldContainer(
                                                     child: TextFormField(
@@ -148,9 +159,8 @@ class _LoginPageState extends State<LoginPage> {
                                                       decoration:
                                                           const InputDecoration(
                                                               icon: Icon(
-                                                                Icons.person,
-                                                                color: Color(
-                                                                    0xff297061),
+                                                                Icons
+                                                                    .person_outline,
                                                               ),
                                                               hintText:
                                                                   'blabla@gmail.com',
@@ -163,9 +173,9 @@ class _LoginPageState extends State<LoginPage> {
                                                       validator:
                                                           Validators.compose([
                                                         Validators.required(
-                                                            'email is required'),
+                                                            'email tidak boleh kosong'),
                                                         Validators.email(
-                                                            'invalid email address')
+                                                            'Mohon masukkan email yang valid')
                                                       ]),
                                                     ),
                                                   )
@@ -193,13 +203,15 @@ class _LoginPageState extends State<LoginPage> {
                                       children: const [
                                         Text('Lupa kata sandi?',
                                             style: TextStyle(
+                                                decoration:
+                                                    TextDecoration.underline,
                                                 color: Color(0xff297061),
                                                 fontFamily: 'Poppins'))
                                       ],
                                     ),
                                   )),
                               const SizedBox(
-                                height: 10,
+                                height: 8,
                               ),
                               RoundedButton(
                                   text: 'Masuk',
@@ -227,8 +239,35 @@ class _LoginPageState extends State<LoginPage> {
                                 'Atau masuk dengan',
                                 style: TextStyle(fontFamily: 'Poppins'),
                               ),
+                              Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(Icons.apple)),
+                                    IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(Icons.facebook)),
+                                    IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(Icons.apple)),
+                                  ],
+                                ),
+                              ),
                               const SizedBox(
-                                height: 20,
+                                height: 10,
+                              ),
+                              UnderPart(
+                                title: "Belum Punya akun?",
+                                navigatorText: "Buat Sekarang",
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const RegisterPage()));
+                                },
                               ),
                             ],
                           ),
