@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:line_awesome_icons/line_awesome_icons.dart';
 
 class UbahAkunPage extends StatefulWidget {
   static const routeName = '/ubahakunpage';
+
   const UbahAkunPage({super.key});
 
   @override
@@ -15,6 +15,7 @@ class _UbahAkunPageState extends State<UbahAkunPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +27,7 @@ class _UbahAkunPageState extends State<UbahAkunPage> {
                 Navigator.pop(context);
               },
               icon: const Icon(
-                LineAwesomeIcons.angle_left,
+                Icons.keyboard_arrow_left,
                 color: Color(0xff297061),
               )),
           title: const Text(
