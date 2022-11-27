@@ -176,7 +176,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: TextStyle(fontSize: 12, color: Colors.red),
                           ),
                           onTap: () {
-                            Navigator.pushNamed(context, LoginPage.routeName1);
+                            Navigator.pushNamed(context, LoginPage.routeName);
                           },
                         ),
                       ],
