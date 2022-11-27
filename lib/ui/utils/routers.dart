@@ -8,7 +8,7 @@ MaterialPageRoute? configRouters(RouteSettings settings) {
   switch (settings.name) {
     case RegisterPage.routeName:
       return MaterialPageRoute(builder: (_) => const RegisterPage());
-    case LoginPage.routeName1:
+    case LoginPage.routeName:
       return MaterialPageRoute(builder: (_) => const LoginPage());
     case ProfilePage.routeName:
       return MaterialPageRoute(builder: (_) => const ProfilePage());

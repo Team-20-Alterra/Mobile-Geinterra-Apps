@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:geinterra_apps/ui/login/login_screen.dart';
-import 'package:geinterra_apps/ui/profile/profile_page.dart';
 import 'package:geinterra_apps/ui/utils/routers.dart';
 import 'package:geinterra_apps/ui/home/home_page.dart';
 
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ProfilePage(),
+      home: const LoginPage(),
       onGenerateRoute: (settings) => configRouters(settings),
     );
   }
