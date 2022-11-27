@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:geinterra_apps/theme.dart';
-import 'package:geinterra_apps/ui/login/login_page.dart';
+import 'package:geinterra_apps/ui/login/login_screen.dart';
 import 'package:geinterra_apps/ui/register/screens/kebijakan_screen.dart';
 import 'package:geinterra_apps/ui/register/screens/syarat_screen.dart';
 import 'package:geinterra_apps/ui/register/widget/custom_checkbox.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = '/loginpage';
@@ -25,7 +24,7 @@ class _LoginScreenState extends State<RegisterPage> {
 
   bool passwordVisible = false;
   bool passwordConfrimationVisible = false;
-  bool isChecked = false;
+  bool isChecked = true;
 
   @override
   void dispose() {
@@ -93,12 +92,12 @@ class _LoginScreenState extends State<RegisterPage> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person_outlined),
                           labelText: 'Nama Lengkap',
-                          hintText: 'Abun',
-                          hintStyle: medium12pt.copyWith(color: textBlack),
+                          hintText: 'Budi',
                           labelStyle: medium12pt.copyWith(color: textBlack),
+                          hintStyle: medium12pt.copyWith(color: textBlack),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(12)),
-                          ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12))),
                         ),
                         validator: (value) {
                           if (value != null && value.length < 4) {
@@ -117,8 +116,8 @@ class _LoginScreenState extends State<RegisterPage> {
                           prefixIcon: Icon(Icons.call_outlined),
                           labelText: 'Nomor Telepon',
                           hintText: '0812345678',
-                          hintStyle: medium12pt.copyWith(color: textBlack),
                           labelStyle: medium12pt.copyWith(color: textBlack),
+                          hintStyle: medium12pt.copyWith(color: textBlack),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))),
@@ -267,17 +266,16 @@ class _LoginScreenState extends State<RegisterPage> {
                               ),
                               (route) => false,
                             );
+                          } else if (isChecked) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: primaryGreen,
+                                content: Text(
+                                  'Are you agree with our Tems & Conditions?',
+                                ),
+                              ),
+                            );
                           }
-                          // isChecked
-                          //     ? isValidForm
-                          //     : ScaffoldMessenger.of(context).showSnackBar(
-                          //         SnackBar(
-                          //           backgroundColor: primaryGreen,
-                          //           content: Text(
-                          //             'Are you agree with our Tems & Conditions?',
-                          //           ),
-                          //         ),
-                          //       );
                         },
                         child: Text('Buat Akun'),
                         style: ElevatedButton.styleFrom(
