@@ -87,7 +87,7 @@ class _UbahAkunPageState extends State<UbahAkunPage> {
                       ),
                       TextFieldContainer(
                         child: TextFormField(
-                          controller: _usernameController,
+                          controller: _phoneController,
                           cursorColor: Color(0xff297061),
                           decoration: InputDecoration(
                               icon: const Icon(
