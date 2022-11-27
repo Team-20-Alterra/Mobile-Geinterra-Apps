@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geinterra_apps/ui/bill/bill_page.dart';
 import 'package:geinterra_apps/ui/home/home_page.dart';
+import 'package:geinterra_apps/ui/profile/profile_page.dart';
 
 import '../utils/colors.dart';
 
 class MainPage extends StatefulWidget {
+  static const routeName = '/homepage';
 
   const MainPage({Key? key}) : super(key: key);
 
@@ -19,10 +22,7 @@ class _MainPageState extends State<MainPage> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     BillPage(),
-    Text(
-      'Profile',
-      style: optionStyle,
-    ),
+    ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -40,41 +40,47 @@ class _MainPageState extends State<MainPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/home_unselected.png',
+            icon: SvgPicture.asset(
+              'assets/home_unselected.svg',
+              color: Colors.white.withOpacity(0.5),
               width: 30,
               height: 30,
             ),
-            activeIcon: Image.asset(
-              'assets/home_selected.png',
+            activeIcon: SvgPicture.asset(
+              'assets/home_selected.svg',
               width: 30,
               height: 30,
+              color: Colors.white,
             ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/bill_unselected.png',
+            icon: SvgPicture.asset(
+              'assets/bill_unselected.svg',
               width: 30,
               height: 30,
+              color: Colors.white.withOpacity(0.5),
             ),
-            activeIcon: Image.asset(
-              'assets/bill_selected.png',
+            activeIcon: SvgPicture.asset(
+              'assets/bill_selected.svg',
               width: 30,
               height: 30,
+              color: Colors.white,
             ),
             label: 'Bill',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/profile_unselected.png',
+            icon: SvgPicture.asset(
+              'assets/profile_unselected.svg',
               width: 30,
               height: 30,
+              color: Colors.white.withOpacity(0.5),
             ),
-            activeIcon: Image.asset(
-              'assets/profile_selected.png',
+            activeIcon: SvgPicture.asset(
+              'assets/profile_selected.svg',
               width: 30,
               height: 30,
+              color: Colors.white,
             ),
             label: 'Profile',
           ),
