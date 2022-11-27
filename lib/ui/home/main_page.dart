@@ -5,6 +5,7 @@ import 'package:geinterra_apps/ui/home/home_page.dart';
 import '../utils/colors.dart';
 
 class MainPage extends StatefulWidget {
+
   const MainPage({Key? key}) : super(key: key);
 
   @override
