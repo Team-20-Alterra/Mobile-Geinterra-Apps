@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:geinterra_apps/ui/login/login_page.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../login/login_screen.dart';
+
 class RegisterPage extends StatefulWidget {
-  static const routeName = '/loginpage';
+  static const routeName = '/registerpage';
+
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
