@@ -7,7 +7,7 @@ import 'package:geinterra_apps/ui/register/screens/syarat_screen.dart';
 import 'package:geinterra_apps/ui/register/widget/custom_checkbox.dart';
 
 class RegisterPage extends StatefulWidget {
-  static const routeName = '/loginpage';
+  static const routeName = '/registerpage';
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class _LoginScreenState extends State<RegisterPage> {
 
   bool passwordVisible = false;
   bool passwordConfrimationVisible = false;
-  bool isChecked = true;
+  bool isChecked = false;
 
   @override
   void dispose() {
@@ -257,6 +257,8 @@ class _LoginScreenState extends State<RegisterPage> {
                           final isValidForm = formKey.currentState!.validate();
                           String username = _nameController.text;
                           String email = _emailController.text;
+                          String telepon = _phoneController.text;
+                          String password = _passwordController.text;
 
                           if (isValidForm) {
                             Navigator.pushAndRemoveUntil(
@@ -266,7 +268,7 @@ class _LoginScreenState extends State<RegisterPage> {
                               ),
                               (route) => false,
                             );
-                          } else if (isChecked) {
+                          } else if (isChecked = !isChecked) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 backgroundColor: primaryGreen,
