@@ -92,9 +92,8 @@ class _LoginScreenState extends State<RegisterPage> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person_outlined),
                           labelText: 'Nama Lengkap',
-                          hintText: 'Budi',
                           labelStyle: medium12pt.copyWith(color: textBlack),
-                          hintStyle: medium12pt.copyWith(color: textBlack),
+                          hintText: 'Budi',
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))),
@@ -169,9 +168,10 @@ class _LoginScreenState extends State<RegisterPage> {
                             onPressed: togglePassword,
                           ),
                           labelText: 'Password',
-                          hintText: '*****',
                           labelStyle: medium12pt.copyWith(color: textBlack),
-                          hintStyle: medium12pt.copyWith(color: textBlack),
+                          hintStyle:
+                              TextStyle(color: Colors.black.withOpacity(0.3)),
+                          hintText: '*****',
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))),
@@ -259,7 +259,25 @@ class _LoginScreenState extends State<RegisterPage> {
                           String email = _emailController.text;
                           String telepon = _phoneController.text;
                           String password = _passwordController.text;
-
+                          // if (isValidForm) {
+                          //   Navigator.pushAndRemoveUntil(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => LoginPage(),
+                          //     ),
+                          //     (route) => false,
+                          //   );
+                          // }
+                          // isChecked
+                          //     ? isValidForm
+                          //     : ScaffoldMessenger.of(context).showSnackBar(
+                          //         SnackBar(
+                          //           backgroundColor: primaryGreen,
+                          //           content: Text(
+                          //             'Are you agree with our Tems & Conditions?',
+                          //           ),
+                          //         ),
+                          //       );
                           if (isValidForm) {
                             Navigator.pushAndRemoveUntil(
                               context,
