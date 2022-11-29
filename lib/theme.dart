@@ -6,8 +6,15 @@ Color textGrey = Color(0xff94959b);
 Color textBlue = Colors.blue;
 Color textWhite = Colors.white;
 Color primaryGreen = Color(0xff297061);
+Color primaryGrey = Colors.grey;
+Color button = Color(0xD9D9D9);
 
 // Bold
+TextStyle heading10 = GoogleFonts.poppins(
+  fontSize: 20,
+  fontWeight: FontWeight.bold,
+);
+
 TextStyle heading6 = GoogleFonts.poppins(
   fontSize: 16,
   fontWeight: FontWeight.bold,
@@ -19,6 +26,11 @@ TextStyle bold = GoogleFonts.poppins(
 );
 
 // Reguler/Normal
+TextStyle regular16pt = GoogleFonts.poppins(
+  fontSize: 16,
+  fontWeight: FontWeight.w400,
+);
+
 TextStyle regular14pt = GoogleFonts.poppins(
   fontSize: 14,
   fontWeight: FontWeight.w400,
@@ -35,6 +47,11 @@ TextStyle regular10pt = GoogleFonts.poppins(
 );
 
 // SemiBold
+TextStyle semibold16pt = GoogleFonts.poppins(
+  fontSize: 16,
+  fontWeight: FontWeight.w600,
+);
+
 TextStyle semibold12pt = GoogleFonts.poppins(
   fontSize: 12,
   fontWeight: FontWeight.w600,
