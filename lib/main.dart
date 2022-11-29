@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:geinterra_apps/ui/register/register_page.dart';
+import 'package:geinterra_apps/ui/login/login_screen.dart';
+import 'package:geinterra_apps/ui/pembayaran/metode/metode_pembayaran.dart';
 import 'package:geinterra_apps/ui/utils/routers.dart';
 import 'package:geinterra_apps/ui/home/home_page.dart';
 
@@ -10,6 +11,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RegisterPage(),
+      home: MetodePembayaran(),
       onGenerateRoute: (settings) => configRouters(settings),
     );
   }

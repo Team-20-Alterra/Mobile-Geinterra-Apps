@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:geinterra_apps/theme.dart';
+import 'package:geinterra_apps/ui/login/login_screen.dart';
 import 'package:geinterra_apps/ui/register/screens/kebijakan_screen.dart';
 import 'package:geinterra_apps/ui/register/screens/syarat_screen.dart';
 import 'package:geinterra_apps/ui/register/widget/custom_checkbox.dart';
 
 class RegisterPage extends StatefulWidget {
-  static const routeName = '/loginpage';
+  static const routeName = '/registerpage';
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
@@ -92,6 +93,7 @@ class _LoginScreenState extends State<RegisterPage> {
                           prefixIcon: Icon(Icons.person_outlined),
                           labelText: 'Nama Lengkap',
                           labelStyle: medium12pt.copyWith(color: textBlack),
+                          hintText: 'Budi',
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))),
@@ -114,6 +116,7 @@ class _LoginScreenState extends State<RegisterPage> {
                           labelText: 'Nomor Telepon',
                           hintText: '0812345678',
                           labelStyle: medium12pt.copyWith(color: textBlack),
+                          hintStyle: medium12pt.copyWith(color: textBlack),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))),
@@ -136,6 +139,7 @@ class _LoginScreenState extends State<RegisterPage> {
                           labelText: 'Email',
                           hintText: 'email@salah.com',
                           labelStyle: medium12pt.copyWith(color: textBlack),
+                          hintStyle: medium12pt.copyWith(color: textBlack),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))),
@@ -167,6 +171,7 @@ class _LoginScreenState extends State<RegisterPage> {
                           labelStyle: medium12pt.copyWith(color: textBlack),
                           hintStyle:
                               TextStyle(color: Colors.black.withOpacity(0.3)),
+                          hintText: '*****',
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))),
@@ -252,7 +257,8 @@ class _LoginScreenState extends State<RegisterPage> {
                           final isValidForm = formKey.currentState!.validate();
                           String username = _nameController.text;
                           String email = _emailController.text;
-
+                          String telepon = _phoneController.text;
+                          String password = _passwordController.text;
                           // if (isValidForm) {
                           //   Navigator.pushAndRemoveUntil(
                           //     context,
@@ -262,16 +268,34 @@ class _LoginScreenState extends State<RegisterPage> {
                           //     (route) => false,
                           //   );
                           // }
-                          isChecked
-                              ? isValidForm
-                              : ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    backgroundColor: primaryGreen,
-                                    content: Text(
-                                      'Are you agree with our Tems & Conditions?',
-                                    ),
-                                  ),
-                                );
+                          // isChecked
+                          //     ? isValidForm
+                          //     : ScaffoldMessenger.of(context).showSnackBar(
+                          //         SnackBar(
+                          //           backgroundColor: primaryGreen,
+                          //           content: Text(
+                          //             'Are you agree with our Tems & Conditions?',
+                          //           ),
+                          //         ),
+                          //       );
+                          if (isValidForm) {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginPage(),
+                              ),
+                              (route) => false,
+                            );
+                          } else if (isChecked = !isChecked) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: primaryGreen,
+                                content: Text(
+                                  'Are you agree with our Tems & Conditions?',
+                                ),
+                              ),
+                            );
+                          }
                         },
                         child: Text('Buat Akun'),
                         style: ElevatedButton.styleFrom(
@@ -295,7 +319,13 @@ class _LoginScreenState extends State<RegisterPage> {
                               style: regular12pt.copyWith(color: textBlack),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginPage()));
+                              },
                               child: Text(
                                 'Masuk',
                                 style: semibold12pt.copyWith(color: textBlack),
