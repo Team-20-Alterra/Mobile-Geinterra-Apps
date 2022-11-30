@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                                   cursorColor: const Color(0xff297061),
                                   decoration: const InputDecoration(
                                       icon: Icon(
-                                        Icons.email_outlined,
+                                        Icons.alternate_email_outlined,
                                         color: Colors.black,
                                       ),
                                       hintText: 'email',
@@ -163,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                                                           const InputDecoration(
                                                               icon: Icon(
                                                                 Icons
-                                                                    .person_outline,
+                                                                    .alternate_email_outlined,
                                                               ),
                                                               hintText:
                                                                   'blabla@gmail.com',
