@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:geinterra_apps/ui/home/main_page.dart';
 import 'package:geinterra_apps/ui/login/login_screen.dart';
-import 'package:geinterra_apps/ui/profile/kebijakan.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_pembayaran.dart';
+import 'package:geinterra_apps/ui/profile/kebijakan.dart';
 import 'package:geinterra_apps/ui/profile/profile_page.dart';
 import 'package:geinterra_apps/ui/profile/sk_page.dart';
 import 'package:geinterra_apps/ui/profile/ubah_akun_page.dart';
 import 'package:geinterra_apps/ui/register/register_page.dart';
+
+import '../detail_invoice/detail_invoice.dart';
+import '../pembayaran/detail/detail_pembayaran.dart';
 
 MaterialPageRoute? configRouters(RouteSettings settings) {
   switch (settings.name) {
@@ -26,6 +29,10 @@ MaterialPageRoute? configRouters(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const KebijakanPage());
     case MainPage.routeName:
       return MaterialPageRoute(builder: (_) => const MainPage());
+    case DetailInvoice.routeName:
+      return MaterialPageRoute(builder: (_) => const DetailInvoice());
+      case DetailPembayaran.routeName:
+      return MaterialPageRoute(builder: (_) => const DetailPembayaran());
   }
   assert(false, 'Need to implement ${settings.name}');
   return null;

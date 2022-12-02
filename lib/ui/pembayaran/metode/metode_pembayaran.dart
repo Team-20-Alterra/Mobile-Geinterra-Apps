@@ -3,9 +3,13 @@ import 'package:geinterra_apps/theme.dart';
 import 'package:geinterra_apps/ui/pembayaran/bantuan/bantuan_pembayaran.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_bank.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_va.dart';
+import 'package:geinterra_apps/ui/widgets/my_appbar.dart';
+
+import '../detail/detail_pembayaran.dart';
 
 class MetodePembayaran extends StatefulWidget {
   static const routeName = '/metodepembayaran';
+
   const MetodePembayaran({super.key});
 
   @override
@@ -17,29 +21,9 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Color(0xff297061),
-          ),
-          onPressed: () {
-            // Navigator.pushReplacement(context,
-            //     MaterialPageRoute(builder: (context) => RegisterPage()));
-          },
-        ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Metode Pembayaran',
-              style: heading6.copyWith(color: primaryGreen),
-            ),
-          ],
-        ),
-      ),
+      appBar: myAppBar(title: "Metode Pembayaran", back: () {
+        Navigator.pop(context);
+      }),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -49,7 +33,7 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
               'Metode Pembayaran',
               style: heading6.copyWith(color: textBlack),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
@@ -175,7 +159,9 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, DetailPembayaran.routeName);
+                  },
                   style: ElevatedButton.styleFrom(backgroundColor: button),
                   child: Text(
                     'Lanjutkan',

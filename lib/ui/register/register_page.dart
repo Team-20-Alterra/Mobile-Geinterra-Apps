@@ -7,7 +7,7 @@ import 'package:geinterra_apps/ui/register/screens/syarat_screen.dart';
 import 'package:geinterra_apps/ui/register/widget/custom_checkbox.dart';
 
 class RegisterPage extends StatefulWidget {
-  static const routeName = '/loginpage';
+  static const routeName = '/registerpage';
 
   const RegisterPage({Key? key}) : super(key: key);
 
