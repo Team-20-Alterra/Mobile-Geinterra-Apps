@@ -21,9 +21,11 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: myAppBar(title: "Metode Pembayaran", back: () {
-        Navigator.pop(context);
-      }),
+      appBar: myAppBar(
+          title: "Metode Pembayaran",
+          back: () {
+            Navigator.pop(context);
+          }),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -34,75 +36,81 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
               style: heading6.copyWith(color: textBlack),
             ),
             const SizedBox(height: 16.0),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(
-                  color: primaryGrey,
-                ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(18.0),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'Rekening Bank',
-                      style: regular14pt.copyWith(color: textBlack),
-                    ),
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, MetodeBank.routeName);
+              },
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: primaryGrey,
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.chevron_right_rounded,
-                      size: 24.0,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MetodeBank()));
-                    },
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(18.0),
                   ),
-                ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'Rekening Bank',
+                        style: regular14pt.copyWith(color: textBlack),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.chevron_right_rounded,
+                        size: 24.0,
+                      ),
+                      onPressed: () {
+
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 16.0),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(
-                  color: primaryGrey,
-                ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(18.0),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'Virtual Akun',
-                      style: regular14pt.copyWith(color: textBlack),
-                    ),
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, MetodeVA.routeName);
+              },
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: primaryGrey,
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.chevron_right_rounded,
-                      size: 24.0,
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MetodeVA()));
-                    },
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(18.0),
                   ),
-                ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'Virtual Akun',
+                        style: regular14pt.copyWith(color: textBlack),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.chevron_right_rounded,
+                        size: 24.0,
+                      ),
+                      onPressed: () {
+
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 16.0),

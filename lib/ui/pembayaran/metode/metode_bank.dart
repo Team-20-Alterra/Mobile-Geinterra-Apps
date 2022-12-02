@@ -4,6 +4,8 @@ import 'package:geinterra_apps/ui/pembayaran/detail/detail_pembayaran.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_pembayaran.dart';
 
 class MetodeBank extends StatefulWidget {
+  static const String routeName = 'methodbank';
+
   const MetodeBank({super.key});
 
   @override
@@ -30,8 +32,7 @@ class _MetodeBankState extends State<MetodeBank> {
             color: Color(0xff297061),
           ),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => MetodePembayaran()));
+            Navigator.pop(context);
           },
         ),
         title: Column(

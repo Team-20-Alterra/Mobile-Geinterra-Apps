@@ -10,6 +10,8 @@ import 'package:geinterra_apps/ui/register/register_page.dart';
 
 import '../detail_invoice/detail_invoice.dart';
 import '../pembayaran/detail/detail_pembayaran.dart';
+import '../pembayaran/metode/metode_bank.dart';
+import '../pembayaran/metode/metode_va.dart';
 
 MaterialPageRoute? configRouters(RouteSettings settings) {
   switch (settings.name) {
@@ -31,8 +33,12 @@ MaterialPageRoute? configRouters(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const MainPage());
     case DetailInvoice.routeName:
       return MaterialPageRoute(builder: (_) => const DetailInvoice());
-      case DetailPembayaran.routeName:
+    case DetailPembayaran.routeName:
       return MaterialPageRoute(builder: (_) => const DetailPembayaran());
+    case MetodeBank.routeName:
+      return MaterialPageRoute(builder: (_) => const MetodeBank());
+    case MetodeVA.routeName:
+      return MaterialPageRoute(builder: (_) => const MetodeVA());
   }
   assert(false, 'Need to implement ${settings.name}');
   return null;
