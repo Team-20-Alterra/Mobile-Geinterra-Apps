@@ -216,11 +216,13 @@ class _LoginPageState extends State<LoginPage> {
                               RoundedButton(
                                   text: 'Masuk',
                                   press: () {
-                                    if (_formKey.currentState!.validate()) {
+                                    Navigator.pushNamed(
+                                        context, MainPage.routeName);
+                                    /*if (_formKey.currentState!.validate()) {
                                       print(_emailController.text.trim());
                                       print(_passwordController.text.trim());
                                       print('success');
-                                    }
+                                    }*/
                                     // FirebaseAuth.instance
                                     //     .signInWithEmailAndPassword(
                                     //         email: _emailController.text.trim(),
