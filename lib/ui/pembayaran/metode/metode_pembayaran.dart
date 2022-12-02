@@ -5,6 +5,8 @@ import 'package:geinterra_apps/ui/pembayaran/metode/metode_bank.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_va.dart';
 import 'package:geinterra_apps/ui/widgets/my_appbar.dart';
 
+import '../detail/detail_pembayaran.dart';
+
 class MetodePembayaran extends StatefulWidget {
   static const routeName = '/metodepembayaran';
 
@@ -19,7 +21,9 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: myAppBar(title: "Metode Pembayaran", back: () {}),
+      appBar: myAppBar(title: "Metode Pembayaran", back: () {
+        Navigator.pop(context);
+      }),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -155,7 +159,9 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, DetailPembayaran.routeName);
+                  },
                   style: ElevatedButton.styleFrom(backgroundColor: button),
                   child: Text(
                     'Lanjutkan',

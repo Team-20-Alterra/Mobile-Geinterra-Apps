@@ -3,10 +3,13 @@ import 'package:geinterra_apps/ui/widgets/horizontal_text.dart';
 import 'package:geinterra_apps/ui/widgets/my_button.dart';
 
 import '../../theme.dart';
+import '../pembayaran/metode/metode_pembayaran.dart';
 import '../widgets/circle_img_asset.dart';
 import '../widgets/my_appbar.dart';
 
 class DetailInvoice extends StatelessWidget {
+  static const String routeName = "detail_page";
+
   const DetailInvoice({Key? key}) : super(key: key);
 
   @override
@@ -29,7 +32,11 @@ class DetailInvoice extends StatelessWidget {
           ),
           Container(
               padding: const EdgeInsets.all(16),
-              child: MyButton(title: "Pay Now", onClick: () {})),
+              child: MyButton(
+                  title: "Pay Now",
+                  onClick: () {
+                    Navigator.pushNamed(context, MetodePembayaran.routeName);
+                  })),
         ],
       ),
     );

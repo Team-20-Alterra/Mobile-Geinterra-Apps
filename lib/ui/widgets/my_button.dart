@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geinterra_apps/ui/utils/colors.dart';
 
 import '../../theme.dart';
+import '../pembayaran/metode/metode_pembayaran.dart';
 
 class MyButton extends StatelessWidget {
   const MyButton({Key? key, required this.title, required this.onClick})
@@ -12,7 +13,9 @@ class MyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => onClick,
+      onPressed: () {
+        onClick();
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: MyColors.myGreen,
         minimumSize: const Size(double.infinity, 48.0),
