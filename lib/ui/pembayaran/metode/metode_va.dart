@@ -4,6 +4,7 @@ import 'package:geinterra_apps/ui/pembayaran/detail/detail_pembayaran.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_pembayaran.dart';
 
 class MetodeVA extends StatefulWidget {
+  static const String routeName = 'methodva';
   const MetodeVA({super.key});
 
   @override
