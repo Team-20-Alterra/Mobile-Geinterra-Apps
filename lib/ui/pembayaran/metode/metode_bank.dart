@@ -32,8 +32,7 @@ class _MetodeBankState extends State<MetodeBank> {
             color: Color(0xff297061),
           ),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => MetodePembayaran()));
+            Navigator.pop(context);
           },
         ),
         title: Column(
