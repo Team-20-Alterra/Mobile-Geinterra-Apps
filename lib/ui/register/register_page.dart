@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/material.dart';
 import 'package:geinterra_apps/theme.dart';
 import 'package:geinterra_apps/ui/login/login_screen.dart';
 import 'package:geinterra_apps/ui/register/screens/kebijakan_screen.dart';
@@ -8,6 +8,7 @@ import 'package:geinterra_apps/ui/register/widget/custom_checkbox.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = '/loginpage';
+
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
@@ -209,78 +210,78 @@ class _LoginScreenState extends State<RegisterPage> {
                                   style: regular10pt.copyWith(color: textBlack),
                                 ),
                                 TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                KebijakanScreen()));
-                                  },
-                                  child: Text(
-                                    'kebijakan privasi',
-                                    style: bold10.copyWith(color: textBlue),
-                                  ),
-                                  Text(
-                                    'dan bersedia menerima informasi dari Ginap',
-                                    style:
-                                        regular10pt.copyWith(color: textBlack),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 32.0,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          final isValidForm = formKey.currentState!.validate();
-                          String username = _nameController.text;
-                          String email = _emailController.text;
-                          String telepon = _phoneController.text;
-                          String password = _passwordController.text;
-                          
-                          // if (isValidForm) {
-                          //   Navigator.pushAndRemoveUntil(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => LoginPage(),
-                          //     ),
-                          //     (route) => false,
-                          //   );
-                          // }
-                          // isChecked
-                          //     ? isValidForm
-                          //     : ScaffoldMessenger.of(context).showSnackBar(
-                          //         SnackBar(
-                          //           backgroundColor: primaryGreen,
-                          //           content: Text(
-                          //             'Are you agree with our Tems & Conditions?',
-                          //           ),
-                          //         ),
-                          //       );
-
-                          if (isValidForm) {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginPage(),
-                              ),
-                              (route) => false,
-                            );
-                          } else if (isChecked) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: primaryGreen,
-                                content: Text(
-                                  'Are you agree with our Tems & Conditions?',
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  KebijakanScreen()));
+                                    },
+                                    child: Text(
+                                      'kebijakan privasi',
+                                      style: bold10.copyWith(color: textBlue),
+                                    )),
+                                Text(
+                                  'dan bersedia menerima informasi dari Ginap',
+                                  style: regular10pt.copyWith(color: textBlack),
                                 ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 32.0,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        final isValidForm = formKey.currentState!.validate();
+                        String username = _nameController.text;
+                        String email = _emailController.text;
+                        String telepon = _phoneController.text;
+                        String password = _passwordController.text;
+
+                        // if (isValidForm) {
+                        //   Navigator.pushAndRemoveUntil(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => LoginPage(),
+                        //     ),
+                        //     (route) => false,
+                        //   );
+                        // }
+                        // isChecked
+                        //     ? isValidForm
+                        //     : ScaffoldMessenger.of(context).showSnackBar(
+                        //         SnackBar(
+                        //           backgroundColor: primaryGreen,
+                        //           content: Text(
+                        //             'Are you agree with our Tems & Conditions?',
+                        //           ),
+                        //         ),
+                        //       );
+
+                        /*if (isValidForm) {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginPage(),
+                            ),
+                                (route) => false,
+                          );
+                        } else if (isChecked) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: primaryGreen,
+                              content: Text(
+                                'Are you agree with our Tems & Conditions?',
                               ),
                             ),
-                          );
-                        }
+                          )
+                        ,
+                        );
+                      }*/
                       },
                       child: Text('Buat Akun'),
                       style: ElevatedButton.styleFrom(
