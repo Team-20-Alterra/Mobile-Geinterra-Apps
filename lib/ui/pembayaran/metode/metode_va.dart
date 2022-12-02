@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geinterra_apps/theme.dart';
+import 'package:geinterra_apps/ui/pembayaran/detail/detail_pembayaran.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_pembayaran.dart';
 
 class MetodeVA extends StatefulWidget {
@@ -9,10 +10,12 @@ class MetodeVA extends StatefulWidget {
   State<MetodeVA> createState() => _MetodeVAState();
 }
 
-enum VirtualAkun { BNI, BCA, BRI, Mandiri, CIMB }
+enum VA { BNI, BCA, BRI, Mandiri, CIMB }
 
 class _MetodeVAState extends State<MetodeVA> {
-  var radioValue = '';
+  VA? radioValue;
+
+  bool isButtonActive = true;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +61,7 @@ class _MetodeVAState extends State<MetodeVA> {
                   Radius.circular(18.0),
                 ),
               ),
-              child: RadioListTile<String>(
+              child: RadioListTile<VA>(
                 secondary: Container(
                   height: 40,
                   width: 40,
@@ -71,12 +74,12 @@ class _MetodeVAState extends State<MetodeVA> {
                   ),
                 ),
                 controlAffinity: ListTileControlAffinity.trailing,
-                value: 'BNI VA',
+                value: VA.BNI,
                 groupValue: radioValue,
                 onChanged: (value) {
                   setState(
                     () {
-                      radioValue = value ?? '';
+                      radioValue = value;
                     },
                   );
                 },
@@ -100,7 +103,7 @@ class _MetodeVAState extends State<MetodeVA> {
                   Radius.circular(18.0),
                 ),
               ),
-              child: RadioListTile<String>(
+              child: RadioListTile<VA>(
                 secondary: Container(
                   height: 40,
                   width: 40,
@@ -113,12 +116,12 @@ class _MetodeVAState extends State<MetodeVA> {
                   ),
                 ),
                 controlAffinity: ListTileControlAffinity.trailing,
-                value: 'BCA VA',
+                value: VA.BCA,
                 groupValue: radioValue,
                 onChanged: (value) {
                   setState(
                     () {
-                      radioValue = value ?? '';
+                      radioValue = value;
                     },
                   );
                 },
@@ -142,7 +145,7 @@ class _MetodeVAState extends State<MetodeVA> {
                   Radius.circular(18.0),
                 ),
               ),
-              child: RadioListTile<String>(
+              child: RadioListTile<VA>(
                 secondary: Container(
                   height: 40,
                   width: 40,
@@ -155,12 +158,12 @@ class _MetodeVAState extends State<MetodeVA> {
                   ),
                 ),
                 controlAffinity: ListTileControlAffinity.trailing,
-                value: 'BRI VA',
+                value: VA.BRI,
                 groupValue: radioValue,
                 onChanged: (value) {
                   setState(
                     () {
-                      radioValue = value ?? '';
+                      radioValue = value;
                     },
                   );
                 },
@@ -184,7 +187,7 @@ class _MetodeVAState extends State<MetodeVA> {
                   Radius.circular(18.0),
                 ),
               ),
-              child: RadioListTile<String>(
+              child: RadioListTile<VA>(
                 secondary: Container(
                   height: 40,
                   width: 40,
@@ -197,12 +200,12 @@ class _MetodeVAState extends State<MetodeVA> {
                   ),
                 ),
                 controlAffinity: ListTileControlAffinity.trailing,
-                value: 'Mandiri VA',
+                value: VA.Mandiri,
                 groupValue: radioValue,
                 onChanged: (value) {
                   setState(
                     () {
-                      radioValue = value ?? '';
+                      radioValue = value;
                     },
                   );
                 },
@@ -226,7 +229,7 @@ class _MetodeVAState extends State<MetodeVA> {
                   Radius.circular(18.0),
                 ),
               ),
-              child: RadioListTile<String>(
+              child: RadioListTile<VA>(
                 secondary: Container(
                   height: 40,
                   width: 40,
@@ -239,12 +242,12 @@ class _MetodeVAState extends State<MetodeVA> {
                   ),
                 ),
                 controlAffinity: ListTileControlAffinity.trailing,
-                value: 'CIMB VA',
+                value: VA.CIMB,
                 groupValue: radioValue,
                 onChanged: (value) {
                   setState(
                     () {
-                      radioValue = value ?? '';
+                      radioValue = value;
                     },
                   );
                 },
@@ -271,8 +274,20 @@ class _MetodeVAState extends State<MetodeVA> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(backgroundColor: button),
+                  onPressed: radioValue != null
+                      ? () {
+                          if (isButtonActive) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailPembayaran(),
+                              ),
+                            );
+                          }
+                        }
+                      : null,
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: primaryGreen),
                   child: Text(
                     'Lanjutkan',
                     style: semibold16pt.copyWith(color: textWhite),

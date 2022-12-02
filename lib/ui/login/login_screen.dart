@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geinterra_apps/ui/home/home_page.dart';
-import 'package:geinterra_apps/ui/home/main_page.dart';
 import 'package:geinterra_apps/ui/login/widgets/rounded_button.dart';
 import 'package:geinterra_apps/ui/login/widgets/text_field_container.dart';
 import 'package:geinterra_apps/ui/register/register_page.dart';
@@ -271,7 +269,12 @@ class _LoginPageState extends State<LoginPage> {
                               RoundedButton(
                                   text: 'Masuk',
                                   press: () {
+                                    Navigator.pushNamed(
+                                        context, MainPage.routeName);
+                                    /*if (_formKey.currentState!.validate()) {
+
                                     if (_formKey.currentState!.validate()) {
+
                                       print(_emailController.text.trim());
                                       print(_passwordController.text.trim());
                                       print('success');
