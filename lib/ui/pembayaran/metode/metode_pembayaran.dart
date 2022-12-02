@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geinterra_apps/theme.dart';
+import 'package:geinterra_apps/ui/pembayaran/bantuan/bantuan_pembayaran.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_bank.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_va.dart';
 import 'package:geinterra_apps/ui/widgets/my_appbar.dart';
@@ -116,24 +117,22 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(16.0),
                     child: Text(
                       'Apakah kamu mempunyai masalah pembayaran?',
                       style: regular14pt.copyWith(color: textBlack),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(16.0),
                     child: TextButton(
                       onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => SyaratScreen()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Bantuan()));
                       },
                       child: Text(
                         'Bantuan',
-                        style: bold.copyWith(color: textBlack),
+                        style: bold.copyWith(color: textBlue),
                       ),
                     ),
                   ),
@@ -150,7 +149,7 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
               style: heading10.copyWith(color: textBlack),
             ),
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
+              margin: EdgeInsets.symmetric(vertical: 10),
               width: double.infinity,
               height: size.height * 0.06,
               child: ClipRRect(
