@@ -221,15 +221,11 @@ class _LoginScreenState extends State<RegisterPage> {
                                     style: bold10.copyWith(color: textBlue),
                                   ),
                                   Text(
-                                    'dan',
+                                    'dan bersedia menerima informasi dari Ginap',
                                     style:
-                                        regular14pt.copyWith(color: textBlack),
+                                        regular10pt.copyWith(color: textBlack),
                                   ),
                                 ],
-                              ),
-                              Text(
-                                'bersedia menerima informasi dari Ginap',
-                                style: regular14pt.copyWith(color: textBlack),
                               ),
                             ],
                           ),
@@ -243,6 +239,28 @@ class _LoginScreenState extends State<RegisterPage> {
                           final isValidForm = formKey.currentState!.validate();
                           String username = _nameController.text;
                           String email = _emailController.text;
+                          String telepon = _phoneController.text;
+                          String password = _passwordController.text;
+                          
+                          // if (isValidForm) {
+                          //   Navigator.pushAndRemoveUntil(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => LoginPage(),
+                          //     ),
+                          //     (route) => false,
+                          //   );
+                          // }
+                          // isChecked
+                          //     ? isValidForm
+                          //     : ScaffoldMessenger.of(context).showSnackBar(
+                          //         SnackBar(
+                          //           backgroundColor: primaryGreen,
+                          //           content: Text(
+                          //             'Are you agree with our Tems & Conditions?',
+                          //           ),
+                          //         ),
+                          //       );
 
                           if (isValidForm) {
                             Navigator.pushAndRemoveUntil(

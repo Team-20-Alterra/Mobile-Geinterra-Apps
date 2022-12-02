@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                                         Icons.email_outlined,
                                         color: Colors.black,
                                       ),
-                                      hintText: 'email@salah.com',
+                                      hintText: 'email',
                                       hintStyle:
                                           TextStyle(fontFamily: 'Poppins'),
                                       border: InputBorder.none),
@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                                         Icons.lock_outline,
                                         color: Colors.black,
                                       ),
-                                      hintText: "pass_salah",
+                                      hintText: "password",
                                       hintStyle: const TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w700),
@@ -115,7 +115,8 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                       border: InputBorder.none),
                                   validator: Validators.compose([
-                                    Validators.required('password is required'),
+                                    Validators.required(
+                                        'email tidak boleh kosong'),
                                   ]),
                                 ),
                               ),
@@ -182,18 +183,70 @@ class _LoginPageState extends State<LoginPage> {
                                                 ],
                                               )),
                                               actions: <Widget>[
-                                                TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: const Text('Batal')),
-                                                TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: const Text('Kirim')),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Expanded(
+                                                      child: TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child:
+                                                            const Text('Batal'),
+                                                        style: ButtonStyle(
+                                                            foregroundColor:
+                                                                MaterialStateProperty.all(
+                                                                    Colors
+                                                                        .white),
+                                                            backgroundColor:
+                                                                MaterialStateProperty.all(
+                                                                    Color(
+                                                                        0xff498679)),
+                                                            shape: MaterialStateProperty.all<
+                                                                    RoundedRectangleBorder>(
+                                                                RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            15),
+                                                                    side: BorderSide(color: Color(0xff297061))))),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Expanded(
+                                                      child: TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child:
+                                                            const Text('Kirim'),
+                                                        style: ButtonStyle(
+                                                            foregroundColor:
+                                                                MaterialStateProperty.all(
+                                                                    Colors
+                                                                        .white),
+                                                            backgroundColor:
+                                                                MaterialStateProperty.all(
+                                                                    Color(
+                                                                        0xff297061)),
+                                                            shape: MaterialStateProperty.all<
+                                                                    RoundedRectangleBorder>(
+                                                                RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            15),
+                                                                    side: BorderSide(color: Colors.white)))),
+                                                      ),
+                                                    )
+                                                  ],
+                                                )
                                               ],
                                             );
                                           });
@@ -219,10 +272,16 @@ class _LoginPageState extends State<LoginPage> {
                                     Navigator.pushNamed(
                                         context, MainPage.routeName);
                                     /*if (_formKey.currentState!.validate()) {
+
+                                    if (_formKey.currentState!.validate()) {
+
                                       print(_emailController.text.trim());
                                       print(_passwordController.text.trim());
                                       print('success');
-                                    }*/
+                                      Navigator.pushNamed(
+                                          context, MainPage.routeName);
+                                      ;
+                                    }
                                     // FirebaseAuth.instance
                                     //     .signInWithEmailAndPassword(
                                     //         email: _emailController.text.trim(),
