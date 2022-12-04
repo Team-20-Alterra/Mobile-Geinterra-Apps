@@ -159,31 +159,6 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
                 ],
               ),
             ),
-            Spacer(),
-            Text(
-              'Total Harga',
-              style: regular16pt.copyWith(color: textBlack),
-            ),
-            Text(
-              'Rp. 37.000',
-              style: heading10.copyWith(color: textBlack),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              width: double.infinity,
-              height: size.height * 0.06,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(backgroundColor: button),
-                  child: Text(
-                    'Lanjutkan',
-                    style: semibold16pt.copyWith(color: textWhite),
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),
