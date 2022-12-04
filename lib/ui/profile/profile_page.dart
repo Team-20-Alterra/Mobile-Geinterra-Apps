@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geinterra_apps/ui/login/login_screen.dart';
+import 'package:geinterra_apps/ui/profile/kebijakan.dart';
+import 'package:geinterra_apps/ui/profile/sk_page.dart';
 import 'package:geinterra_apps/ui/profile/ubah_akun_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -87,22 +89,22 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       children: <Widget>[
                         ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.person_add_outlined,
                             color: Colors.black,
                           ),
-                          title: Text(
+                          title: const Text(
                             'Ajak teman',
                             style: TextStyle(fontSize: 12, color: Colors.black),
                           ),
                           onTap: () {},
                         ),
                         ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.edit_outlined,
                             color: Colors.black,
                           ),
-                          title: Text(
+                          title: const Text(
                             'Ubah data akun',
                             style: TextStyle(fontSize: 12, color: Colors.black),
                           ),
@@ -134,44 +136,50 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       children: <Widget>[
                         ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.star_border_outlined,
                             color: Colors.black,
                           ),
-                          title: Text(
+                          title: const Text(
                             'Beri rating',
                             style: TextStyle(fontSize: 12, color: Colors.black),
                           ),
                           onTap: () {},
                         ),
                         ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.note_outlined,
                             color: Colors.black,
                           ),
-                          title: Text(
+                          title: const Text(
                             'Syarat dan Ketentuan',
                             style: TextStyle(fontSize: 12, color: Colors.black),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, SyaratKetentuanPage.routeName);
+                          },
                         ),
                         ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.privacy_tip_outlined,
                             color: Colors.black,
                           ),
-                          title: Text(
+                          title: const Text(
                             'Kebijakan Privasi',
                             style: TextStyle(fontSize: 12, color: Colors.black),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, KebijakanPage.routeName);
+                          },
                         ),
                         ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.logout_outlined,
                             color: Colors.red,
                           ),
-                          title: Text(
+                          title: const Text(
                             'Keluar akun',
                             style: TextStyle(fontSize: 12, color: Colors.red),
                           ),

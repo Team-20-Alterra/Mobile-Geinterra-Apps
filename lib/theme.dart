@@ -36,6 +36,7 @@ TextStyle bold10 = GoogleFonts.poppins(
 );
 
 // Reguler/Normal
+
 TextStyle regular16pt = GoogleFonts.poppins(
   fontSize: 16,
   fontWeight: FontWeight.w400,
