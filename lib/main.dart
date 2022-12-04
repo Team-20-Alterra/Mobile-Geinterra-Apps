@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geinterra_apps/ui/detail_invoice/detail_invoice.dart';
 import 'package:geinterra_apps/ui/login/login_screen.dart';
 import 'package:geinterra_apps/ui/pembayaran/detail/detail_pembayaran.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_pembayaran.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MetodePembayaran(),
+      home: LoginPage(),
       onGenerateRoute: (settings) => configRouters(settings),
     );
   }

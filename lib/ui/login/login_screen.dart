@@ -3,12 +3,15 @@ import 'package:geinterra_apps/ui/login/widgets/rounded_button.dart';
 import 'package:geinterra_apps/ui/login/widgets/text_field_container.dart';
 import 'package:geinterra_apps/ui/register/register_page.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
+
+import '../home/main_page.dart';
 import 'components/page_title_bar.dart';
 import 'components/under_part.dart';
 import 'components/upside.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/loginpage';
+
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -271,27 +274,6 @@ class _LoginPageState extends State<LoginPage> {
                                   press: () {
                                     Navigator.pushNamed(
                                         context, MainPage.routeName);
-                                    /*if (_formKey.currentState!.validate()) {
-
-                                    if (_formKey.currentState!.validate()) {
-
-                                      print(_emailController.text.trim());
-                                      print(_passwordController.text.trim());
-                                      print('success');
-                                      Navigator.pushNamed(
-                                          context, MainPage.routeName);
-                                      ;
-                                    }
-                                    // FirebaseAuth.instance
-                                    //     .signInWithEmailAndPassword(
-                                    //         email: _emailController.text.trim(),
-                                    //         password:
-                                    //             _passwordController.text.trim())
-                                    //     .then((value) => Navigator.push(
-                                    //         context,
-                                    //         MaterialPageRoute(
-                                    //             builder: (context) =>
-                                    //                 const BottomNavigatorView())));
                                   }),
                               const SizedBox(
                                 height: 10,
