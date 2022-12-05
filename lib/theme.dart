@@ -15,6 +15,11 @@ TextStyle heading10 = GoogleFonts.poppins(
   fontWeight: FontWeight.bold,
 );
 
+TextStyle heading8 = GoogleFonts.poppins(
+  fontSize: 18,
+  fontWeight: FontWeight.bold,
+);
+
 TextStyle heading6 = GoogleFonts.poppins(
   fontSize: 16,
   fontWeight: FontWeight.bold,
@@ -22,6 +27,11 @@ TextStyle heading6 = GoogleFonts.poppins(
 
 TextStyle bold = GoogleFonts.poppins(
   fontSize: 14,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle bold10 = GoogleFonts.poppins(
+  fontSize: 10,
   fontWeight: FontWeight.bold,
 );
 
@@ -48,6 +58,10 @@ TextStyle regular10pt = GoogleFonts.poppins(
 );
 
 // SemiBold
+TextStyle semibold18pt = GoogleFonts.poppins(
+  fontSize: 18,
+  fontWeight: FontWeight.w600,
+);
 
 TextStyle semibold16pt = GoogleFonts.poppins(
   fontSize: 16,

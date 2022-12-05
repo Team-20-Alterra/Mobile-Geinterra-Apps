@@ -4,16 +4,20 @@ import 'package:geinterra_apps/ui/pembayaran/detail/detail_pembayaran.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_pembayaran.dart';
 
 class MetodeBank extends StatefulWidget {
+  static const String routeName = 'methodbank';
+
   const MetodeBank({super.key});
 
   @override
   State<MetodeBank> createState() => _MetodeBankState();
 }
 
-enum VirtualAkun { BNI, BCA, BRI, Mandiri, BSI, Jenius, CIMB }
+enum Bank { BNI, BCA, BRI, Mandiri, BSI, Jenius, CIMB }
 
 class _MetodeBankState extends State<MetodeBank> {
-  var radioValue = '';
+  Bank? radioValue;
+
+  bool isButtonActive = true;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +32,7 @@ class _MetodeBankState extends State<MetodeBank> {
             color: Color(0xff297061),
           ),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => MetodePembayaran()));
+            Navigator.pop(context);
           },
         ),
         title: Column(
@@ -59,7 +62,7 @@ class _MetodeBankState extends State<MetodeBank> {
                   Radius.circular(18.0),
                 ),
               ),
-              child: RadioListTile<String>(
+              child: RadioListTile<Bank>(
                 secondary: Container(
                   height: 40,
                   width: 40,
@@ -72,12 +75,12 @@ class _MetodeBankState extends State<MetodeBank> {
                   ),
                 ),
                 controlAffinity: ListTileControlAffinity.trailing,
-                value: 'BNI',
+                value: Bank.BNI,
                 groupValue: radioValue,
                 onChanged: (value) {
                   setState(
                     () {
-                      radioValue = value ?? '';
+                      radioValue = value;
                     },
                   );
                 },
@@ -101,7 +104,7 @@ class _MetodeBankState extends State<MetodeBank> {
                   Radius.circular(18.0),
                 ),
               ),
-              child: RadioListTile<String>(
+              child: RadioListTile<Bank>(
                 secondary: Container(
                   height: 40,
                   width: 40,
@@ -114,12 +117,12 @@ class _MetodeBankState extends State<MetodeBank> {
                   ),
                 ),
                 controlAffinity: ListTileControlAffinity.trailing,
-                value: 'BCA',
+                value: Bank.BCA,
                 groupValue: radioValue,
                 onChanged: (value) {
                   setState(
                     () {
-                      radioValue = value ?? '';
+                      radioValue = value;
                     },
                   );
                 },
@@ -143,7 +146,7 @@ class _MetodeBankState extends State<MetodeBank> {
                   Radius.circular(18.0),
                 ),
               ),
-              child: RadioListTile<String>(
+              child: RadioListTile<Bank>(
                 secondary: Container(
                   height: 40,
                   width: 40,
@@ -156,12 +159,12 @@ class _MetodeBankState extends State<MetodeBank> {
                   ),
                 ),
                 controlAffinity: ListTileControlAffinity.trailing,
-                value: 'BRI',
+                value: Bank.BRI,
                 groupValue: radioValue,
                 onChanged: (value) {
                   setState(
                     () {
-                      radioValue = value ?? '';
+                      radioValue = value;
                     },
                   );
                 },
@@ -185,7 +188,7 @@ class _MetodeBankState extends State<MetodeBank> {
                   Radius.circular(18.0),
                 ),
               ),
-              child: RadioListTile<String>(
+              child: RadioListTile<Bank>(
                 secondary: Container(
                   height: 40,
                   width: 40,
@@ -198,12 +201,12 @@ class _MetodeBankState extends State<MetodeBank> {
                   ),
                 ),
                 controlAffinity: ListTileControlAffinity.trailing,
-                value: 'Mandiri',
+                value: Bank.Mandiri,
                 groupValue: radioValue,
                 onChanged: (value) {
                   setState(
                     () {
-                      radioValue = value ?? '';
+                      radioValue = value;
                     },
                   );
                 },
@@ -227,7 +230,7 @@ class _MetodeBankState extends State<MetodeBank> {
                   Radius.circular(18.0),
                 ),
               ),
-              child: RadioListTile<String>(
+              child: RadioListTile<Bank>(
                 secondary: Container(
                   height: 40,
                   width: 40,
@@ -240,12 +243,12 @@ class _MetodeBankState extends State<MetodeBank> {
                   ),
                 ),
                 controlAffinity: ListTileControlAffinity.trailing,
-                value: 'BSI',
+                value: Bank.BSI,
                 groupValue: radioValue,
                 onChanged: (value) {
                   setState(
                     () {
-                      radioValue = value ?? '';
+                      radioValue = value;
                     },
                   );
                 },
@@ -269,7 +272,7 @@ class _MetodeBankState extends State<MetodeBank> {
                   Radius.circular(18.0),
                 ),
               ),
-              child: RadioListTile<String>(
+              child: RadioListTile<Bank>(
                 secondary: Container(
                   height: 40,
                   width: 40,
@@ -282,12 +285,12 @@ class _MetodeBankState extends State<MetodeBank> {
                   ),
                 ),
                 controlAffinity: ListTileControlAffinity.trailing,
-                value: 'Jenius/BTPN',
+                value: Bank.Jenius,
                 groupValue: radioValue,
                 onChanged: (value) {
                   setState(
                     () {
-                      radioValue = value ?? '';
+                      radioValue = value;
                     },
                   );
                 },
@@ -311,7 +314,7 @@ class _MetodeBankState extends State<MetodeBank> {
                   Radius.circular(18.0),
                 ),
               ),
-              child: RadioListTile<String>(
+              child: RadioListTile<Bank>(
                 secondary: Container(
                   height: 40,
                   width: 40,
@@ -324,12 +327,12 @@ class _MetodeBankState extends State<MetodeBank> {
                   ),
                 ),
                 controlAffinity: ListTileControlAffinity.trailing,
-                value: 'CIMB/CIMB Syariah',
+                value: Bank.CIMB,
                 groupValue: radioValue,
                 onChanged: (value) {
                   setState(
                     () {
-                      radioValue = value ?? '';
+                      radioValue = value;
                     },
                   );
                 },
@@ -356,15 +359,20 @@ class _MetodeBankState extends State<MetodeBank> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailPembayaran(),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(backgroundColor: button),
+                  onPressed: radioValue != null
+                      ? () {
+                          if (isButtonActive) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailPembayaran(),
+                              ),
+                            );
+                          }
+                        }
+                      : null,
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: primaryGreen),
                   child: Text(
                     'Lanjutkan',
                     style: semibold16pt.copyWith(color: textWhite),
