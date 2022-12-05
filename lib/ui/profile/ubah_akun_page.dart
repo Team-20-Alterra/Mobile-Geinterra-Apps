@@ -15,6 +15,7 @@ class _UbahAkunPageState extends State<UbahAkunPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -105,12 +106,26 @@ class _UbahAkunPageState extends State<UbahAkunPage> {
                         child: TextFormField(
                           controller: _emailController,
                           cursorColor: const Color(0xff297061),
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                               icon: Icon(
                                 Icons.email_outlined,
                                 color: Colors.black,
                               ),
                               hintText: 'RickyFahrez4545@gmail.com',
+                              hintStyle: TextStyle(fontFamily: 'Poppins'),
+                              border: InputBorder.none),
+                        ),
+                      ),
+                      TextFieldContainer(
+                        child: TextFormField(
+                          controller: _addressController,
+                          cursorColor: const Color(0xff297061),
+                          decoration: InputDecoration(
+                              icon: Icon(
+                                Icons.location_pin,
+                                color: Colors.black,
+                              ),
+                              hintText: 'Jl, Lorem block 4',
                               hintStyle: TextStyle(fontFamily: 'Poppins'),
                               border: InputBorder.none),
                         ),
