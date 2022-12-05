@@ -46,9 +46,10 @@ class _LoginScreenState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(255, 242, 242, 242),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
             Icons.account_circle_outlined,
@@ -210,22 +211,23 @@ class _LoginScreenState extends State<RegisterPage> {
                                   style: regular10pt.copyWith(color: textBlack),
                                 ),
                                 TextButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  KebijakanScreen()));
-                                    },
-                                    child: Text(
-                                      'kebijakan privasi',
-                                      style: bold10.copyWith(color: textBlue),
-                                    )),
-                                Text(
-                                  'dan bersedia menerima informasi dari Ginap',
-                                  style: regular10pt.copyWith(color: textBlack),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                KebijakanScreen()));
+                                  },
+                                  child: Text(
+                                    'kebijakan privasi',
+                                    style: bold10.copyWith(color: textBlue),
+                                  ),
                                 ),
                               ],
+                            ),
+                            Text(
+                              'bersedia menerima informasi dari Ginap',
+                              style: regular10pt.copyWith(color: textBlack),
                             ),
                           ],
                         ),
