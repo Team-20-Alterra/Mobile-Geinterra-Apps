@@ -23,9 +23,9 @@ class VersionPage extends StatelessWidget {
             style: TextStyle(color: Color(0xff297061), fontFamily: 'Poppins'),
           )),
       body: Container(
-        padding: const EdgeInsets.all(32.0),
+        padding: const EdgeInsets.all(30.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: const [
             Text(
               'Versi Aplikasi',
