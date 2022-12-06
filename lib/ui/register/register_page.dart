@@ -2,9 +2,12 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:geinterra_apps/theme.dart';
 import 'package:geinterra_apps/ui/login/login_screen.dart';
+import 'package:geinterra_apps/ui/register/model/api/register_api.dart';
+import 'package:geinterra_apps/ui/register/providers/register_view_model.dart';
 import 'package:geinterra_apps/ui/register/screens/kebijakan_screen.dart';
 import 'package:geinterra_apps/ui/register/screens/syarat_screen.dart';
 import 'package:geinterra_apps/ui/register/widget/custom_checkbox.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = '/registerpage';
@@ -12,10 +15,11 @@ class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<RegisterPage> createState() => _LoginScreenState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginScreenState extends State<RegisterPage> {
+class _RegisterPageState extends State<RegisterPage> {
+  String resultDio = '';
   final formKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
@@ -25,8 +29,7 @@ class _LoginScreenState extends State<RegisterPage> {
 
   bool passwordVisible = false;
   bool passwordConfrimationVisible = false;
-  bool isChecked = true;
-
+  bool isChecked = false;
   @override
   void dispose() {
     _nameController.dispose();
@@ -37,14 +40,9 @@ class _LoginScreenState extends State<RegisterPage> {
   }
 
   @override
-  void togglePassword() {
-    setState(() {
-      passwordVisible = !passwordVisible;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<RegisterViewModel>(context, listen: false);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(255, 242, 242, 242),
@@ -114,8 +112,8 @@ class _LoginScreenState extends State<RegisterPage> {
                                 BorderRadius.all(Radius.circular(12))),
                       ),
                       validator: (phone) {
-                        if (phone != null && phone.length < 10) {
-                          return 'Enter min. 10 digit';
+                        if (phone != null && phone.length < 8) {
+                          return 'Enter min. 8 digit';
                         } else {
                           return null; //form is valid
                         }
@@ -147,31 +145,37 @@ class _LoginScreenState extends State<RegisterPage> {
                     SizedBox(
                       height: 12.0,
                     ),
-                    TextFormField(
-                      controller: _passwordController,
-                      obscureText: !passwordVisible,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock_outline),
-                        suffixIcon: IconButton(
-                          icon: Icon(passwordVisible
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined),
-                          onPressed: togglePassword,
-                        ),
-                        labelText: 'Password',
-                        labelStyle: medium12pt.copyWith(color: textBlack),
-                        hintStyle:
-                            TextStyle(color: Colors.black.withOpacity(0.3)),
-                        hintText: '*****',
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12))),
-                      ),
-                      validator: (password) {
-                        if (password != null && password.length < 5) {
-                          return 'Enter min. 5 characters';
-                        }
-                        return null;
+                    Consumer<RegisterViewModel>(
+                      builder: (context, value, child) {
+                        return TextFormField(
+                          controller: _passwordController,
+                          obscureText: value.toogle,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.lock_outline),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                value.toogleTheme();
+                              },
+                              icon: Icon(value.toogle
+                                  ? Icons.visibility_off
+                                  : Icons.visibility),
+                            ),
+                            labelText: 'Password',
+                            labelStyle: medium12pt.copyWith(color: textBlack),
+                            hintStyle:
+                                TextStyle(color: Colors.black.withOpacity(0.3)),
+                            hintText: '*****',
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12))),
+                          ),
+                          validator: (password) {
+                            if (password != null && password.length < 5) {
+                              return 'Enter min. 5 characters';
+                            }
+                            return null;
+                          },
+                        );
                       },
                     ),
                     SizedBox(
@@ -234,56 +238,36 @@ class _LoginScreenState extends State<RegisterPage> {
                       ],
                     ),
                     SizedBox(
-                      height: 32.0,
+                      height: 24.0,
                     ),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         final isValidForm = formKey.currentState!.validate();
                         String username = _nameController.text;
                         String email = _emailController.text;
-                        String telepon = _phoneController.text;
+                        String phone = _phoneController.text;
                         String password = _passwordController.text;
 
-                        // if (isValidForm) {
-                        //   Navigator.pushAndRemoveUntil(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => LoginPage(),
-                        //     ),
-                        //     (route) => false,
-                        //   );
-                        // }
-                        // isChecked
-                        //     ? isValidForm
-                        //     : ScaffoldMessenger.of(context).showSnackBar(
-                        //         SnackBar(
-                        //           backgroundColor: primaryGreen,
-                        //           content: Text(
-                        //             'Are you agree with our Tems & Conditions?',
-                        //           ),
-                        //         ),
-                        //       );
-
-                        /*if (isValidForm) {
+                        if (isValidForm) {
+                          userProvider.addBool(false);
+                          userProvider.setName(username);
+                          userProvider.setEmail(email);
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                               builder: (context) => LoginPage(),
                             ),
-                                (route) => false,
+                            (route) => false,
                           );
-                        } else if (isChecked) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: primaryGreen,
-                              content: Text(
-                                'Are you agree with our Tems & Conditions?',
-                              ),
-                            ),
-                          )
-                        ,
+                        }
+                        final response = await RegisterApi().createUser(
+                          name: _nameController.text,
+                          email: _emailController.text,
+                          phone: _phoneController.text,
+                          password: _passwordController.text,
                         );
-                      }*/
+                        resultDio = response.toString();
+                        setState(() {});
                       },
                       child: Text('Buat Akun'),
                       style: ElevatedButton.styleFrom(
@@ -317,6 +301,9 @@ class _LoginScreenState extends State<RegisterPage> {
                           ),
                         ),
                       ],
+                    ),
+                    Text(
+                      resultDio.toString(),
                     ),
                   ],
                 ),
