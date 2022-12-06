@@ -3,6 +3,7 @@ import 'package:geinterra_apps/ui/login/login_screen.dart';
 import 'package:geinterra_apps/ui/profile/kebijakan.dart';
 import 'package:geinterra_apps/ui/profile/sk_page.dart';
 import 'package:geinterra_apps/ui/profile/ubah_akun_page.dart';
+import 'package:geinterra_apps/ui/profile/version.dart';
 
 class ProfilePage extends StatefulWidget {
   static const routeName = '/profilpage';
@@ -94,10 +95,12 @@ class _ProfilePageState extends State<ProfilePage> {
                             color: Colors.black,
                           ),
                           title: const Text(
-                            'Ajak teman',
+                            'Version',
                             style: TextStyle(fontSize: 12, color: Colors.black),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(context, VersionPage.routeName);
+                          },
                         ),
                         ListTile(
                           leading: const Icon(
