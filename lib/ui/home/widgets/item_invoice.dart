@@ -20,7 +20,7 @@ class ItemTransaction extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           const CircleImgAsset(
-              width: 50, height: 50, asset: 'assets/item_img.png'),
+              width: 50, height: 50, asset: 'assets/invoice.png'),
           const SizedBox(
             width: 12,
           ),
