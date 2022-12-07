@@ -15,9 +15,7 @@ class HomePage extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
+        child: ListView(
           children: [
             _header(context),
             const SizedBox(
@@ -41,6 +39,7 @@ class HomePage extends StatelessWidget {
                       return ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
                         itemCount: provider.list.length,
                         itemBuilder: (context, position) {
                           return Padding(

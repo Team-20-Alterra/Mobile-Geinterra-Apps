@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class CustomInterceptors extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers["Authorization"] = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiIiLCJlbWFpbCI6ImtlbG9tcG9rMjBhbHRhQGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwiZXhwIjoxNjcwNjgwMDMxfQ.A8g5IVFXJWNyo8d0hLDlimMcVGLt6mYhGdZ9cY51b3U";
+    options.headers["Authorization"] = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiIiLCJlbWFpbCI6ImNob3N0aW5nNjNAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiZXhwIjoxNjcwNjg1MzI4fQ.B7_yyAyFKO5I1eOPUo6MltP5dzBJi1HRfvo6X2K8KBU";
     print(
         "--> ${options.method.toUpperCase()} ${options.baseUrl} ${options.path}");
     print("Headers:");
