@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geinterra_apps/providers/register_view_model.dart';
 import 'package:geinterra_apps/ui/detail_invoice/detail_invoice.dart';
+import 'package:geinterra_apps/ui/landingpage/landing_page.dart';
 import 'package:geinterra_apps/ui/login/login_screen.dart';
 import 'package:geinterra_apps/ui/onboarding/onboarding.dart';
 import 'package:geinterra_apps/ui/pembayaran/detail/detail_pembayaran.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: OnboardingPage(),
+        home: LandingPage(),
         onGenerateRoute: (settings) => configRouters(settings),
       ),
     );
