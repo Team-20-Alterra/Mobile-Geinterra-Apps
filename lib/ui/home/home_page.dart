@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:geinterra_apps/ui/home/provider/home_provider.dart';
 import 'package:geinterra_apps/ui/home/widgets/item_invoice.dart';
 import 'package:geinterra_apps/ui/home/widgets/shape_icon.dart';
+import 'package:geinterra_apps/ui/utils/result_state.dart';
 import 'package:geinterra_apps/ui/widgets/circle_img_asset.dart';
 import 'package:geinterra_apps/ui/widgets/title_section.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,62 +15,56 @@ class HomePage extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: SafeArea(
-        child: ListView(padding: const EdgeInsets.all(16), children: [
-          _header(context),
-          const SizedBox(
-            height: 24,
-          ),
-          _articel(context),
-          const SizedBox(
-            height: 16,
-          ),
-          _listTransaction(context)
-        ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            _header(context),
+            const SizedBox(
+              height: 24,
+            ),
+            _articel(context),
+            const SizedBox(
+              height: 16,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 16, right: 16),
+              child: TitleSection(title: 'Transaksi belum dibayar'),
+            ),
+            Consumer<HomeProvider>(
+              builder: (contex, provider, _) {
+                switch (provider.state) {
+                  case ResultState.Success:
+                    if (provider.list.isEmpty) {
+                      return _emptyView(context);
+                    } else {
+                      return ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: provider.list.length,
+                        itemBuilder: (context, position) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: ItemTransaction(
+                              invoice: provider.list[position],
+                            ),
+                          );
+                        },
+                        padding: const EdgeInsets.all(16),
+                      );
+                    }
+                  case ResultState.Loading:
+                    return const Center(child: CircularProgressIndicator());
+                  case ResultState.Error:
+                    return Center(child: Text(provider.message));
+                  default:
+                    return const SizedBox();
+                }
+              },
+            ),
+          ],
+        ),
       ),
-    );
-  }
-
-  Widget _listTransaction(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        TitleSection(title: 'Transaksi belum dibayar'),
-        SizedBox(
-          height: 16,
-        ),
-        ItemTransaction(),
-        SizedBox(
-          height: 10,
-        ),
-        ItemTransaction(),
-        SizedBox(
-          height: 10,
-        ),
-        ItemTransaction(),
-        SizedBox(
-          height: 10,
-        ),
-        ItemTransaction(),
-        SizedBox(
-          height: 10,
-        ),
-        ItemTransaction(),
-        SizedBox(
-          height: 10,
-        ),
-        ItemTransaction(),
-        SizedBox(
-          height: 10,
-        ),
-        ItemTransaction(),
-        SizedBox(
-          height: 10,
-        ),
-        ItemTransaction(),
-        SizedBox(
-          height: 10,
-        ),
-      ],
     );
   }
 
@@ -76,7 +73,6 @@ class HomePage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
       children: [
-        const TitleSection(title: 'Transaksi belum dibayar'),
         const SizedBox(
           height: 30,
         ),
@@ -103,104 +99,110 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _articel(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const TitleSection(title: 'Artikel'),
-        const SizedBox(
-          height: 24,
-        ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              Container(
-                  width: 135,
-                  height: 150,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.all(Radius.circular(16)))),
-              const SizedBox(
-                width: 8,
-              ),
-              Container(
-                  width: 135,
-                  height: 150,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.all(Radius.circular(16)))),
-              const SizedBox(
-                width: 8,
-              ),
-              Container(
-                  width: 135,
-                  height: 150,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.all(Radius.circular(16)))),
-              const SizedBox(
-                width: 8,
-              ),
-              Container(
-                  width: 135,
-                  height: 150,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.all(Radius.circular(16)))),
-              const SizedBox(
-                width: 8,
-              ),
-              Container(
-                  width: 135,
-                  height: 150,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.all(Radius.circular(16)))),
-            ],
+    return Container(
+      padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const TitleSection(title: 'Artikel'),
+          const SizedBox(
+            height: 24,
           ),
-        )
-      ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                Container(
+                    width: 135,
+                    height: 150,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(16)))),
+                const SizedBox(
+                  width: 8,
+                ),
+                Container(
+                    width: 135,
+                    height: 150,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(16)))),
+                const SizedBox(
+                  width: 8,
+                ),
+                Container(
+                    width: 135,
+                    height: 150,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(16)))),
+                const SizedBox(
+                  width: 8,
+                ),
+                Container(
+                    width: 135,
+                    height: 150,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(16)))),
+                const SizedBox(
+                  width: 8,
+                ),
+                Container(
+                    width: 135,
+                    height: 150,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(16)))),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 
   Widget _header(BuildContext context) {
-    return Row(
-      children: [
-        const CircleImgAsset(
-            width: 60, height: 60, asset: 'assets/icon_user.jpg'),
-        const SizedBox(
-          width: 16,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            RichText(
-                text: TextSpan(
-                    text: 'Hello,',
-                    style: DefaultTextStyle.of(context).style,
-                    children: const [
-                  TextSpan(
-                      text: ' Ricky',
-                      style: TextStyle(fontWeight: FontWeight.bold))
-                ])),
-            const SizedBox(
-              height: 8,
-            ),
-            const Text('Riky4545'),
-          ],
-        ),
-        const Expanded(
-          flex: 1,
-          child: SizedBox(),
-        ),
-        const ShapeIcon(
-            width: 60, height: 60, icon: Icons.notifications_outlined)
-      ],
+    return Container(
+      padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+      child: Row(
+        children: [
+          const CircleImgAsset(
+              width: 60, height: 60, asset: 'assets/icon_user.jpg'),
+          const SizedBox(
+            width: 16,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RichText(
+                  text: TextSpan(
+                      text: 'Hello,',
+                      style: DefaultTextStyle.of(context).style,
+                      children: const [
+                    TextSpan(
+                        text: ' Ricky',
+                        style: TextStyle(fontWeight: FontWeight.bold))
+                  ])),
+              const SizedBox(
+                height: 8,
+              ),
+              const Text('Riky4545'),
+            ],
+          ),
+          const Expanded(
+            flex: 1,
+            child: SizedBox(),
+          ),
+          const ShapeIcon(
+              width: 60, height: 60, icon: Icons.notifications_outlined)
+        ],
+      ),
     );
   }
 }
