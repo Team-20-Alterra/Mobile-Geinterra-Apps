@@ -5,8 +5,6 @@ import 'package:geinterra_apps/ui/pembayaran/metode/metode_bank.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_va.dart';
 import 'package:geinterra_apps/ui/widgets/my_appbar.dart';
 
-import '../detail/detail_pembayaran.dart';
-
 class MetodePembayaran extends StatefulWidget {
   static const routeName = '/metodepembayaran';
 
@@ -19,7 +17,6 @@ class MetodePembayaran extends StatefulWidget {
 class _MetodePembayaranState extends State<MetodePembayaran> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: myAppBar(
           title: "Metode Pembayaran",
@@ -61,14 +58,12 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
                         style: regular14pt.copyWith(color: textBlack),
                       ),
                     ),
-                    IconButton(
-                      icon: Icon(
+                    Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Icon(
                         Icons.chevron_right_rounded,
                         size: 24.0,
                       ),
-                      onPressed: () {
-
-                      },
                     ),
                   ],
                 ),
@@ -94,20 +89,18 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.0),
                       child: Text(
                         'Virtual Akun',
                         style: regular14pt.copyWith(color: textBlack),
                       ),
                     ),
-                    IconButton(
-                      icon: Icon(
+                    Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Icon(
                         Icons.chevron_right_rounded,
                         size: 24.0,
                       ),
-                      onPressed: () {
-
-                      },
                     ),
                   ],
                 ),
@@ -149,33 +142,6 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
                     ),
                   ),
                 ],
-              ),
-            ),
-            Spacer(),
-            Text(
-              'Total Harga',
-              style: regular16pt.copyWith(color: textBlack),
-            ),
-            Text(
-              'Rp. 37.000',
-              style: heading10.copyWith(color: textBlack),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              width: double.infinity,
-              height: size.height * 0.06,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, DetailPembayaran.routeName);
-                  },
-                  style: ElevatedButton.styleFrom(backgroundColor: button),
-                  child: Text(
-                    'Lanjutkan',
-                    style: semibold16pt.copyWith(color: textWhite),
-                  ),
-                ),
               ),
             ),
           ],
