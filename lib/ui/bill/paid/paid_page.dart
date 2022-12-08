@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../home/widgets/item_invoice.dart';
-
 class PaidPage extends StatelessWidget {
   const PaidPage({Key? key}) : super(key: key);
 
@@ -26,38 +24,6 @@ class PaidPage extends StatelessWidget {
         ),
         const SizedBox(
           height: 16,
-        ),
-        const ItemTransaction(),
-        const SizedBox(
-          height: 10,
-        ),
-        const ItemTransaction(),
-        const SizedBox(
-          height: 10,
-        ),
-        const ItemTransaction(),
-        const SizedBox(
-          height: 10,
-        ),
-        const ItemTransaction(),
-        const SizedBox(
-          height: 10,
-        ),
-        const ItemTransaction(),
-        const SizedBox(
-          height: 10,
-        ),
-        const ItemTransaction(),
-        const SizedBox(
-          height: 10,
-        ),
-        const ItemTransaction(),
-        const SizedBox(
-          height: 10,
-        ),
-        const ItemTransaction(),
-        const SizedBox(
-          height: 10,
         ),
       ],
     );
