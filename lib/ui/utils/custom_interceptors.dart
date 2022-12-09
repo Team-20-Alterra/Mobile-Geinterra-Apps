@@ -1,40 +1,15 @@
 import 'package:dio/dio.dart';
 
-class CustomInterceptors extends Interceptor {
+class CustomInterceptors extends LogInterceptor {
+  final String token;
+
+  CustomInterceptors({required this.token})
+      : super(requestBody: true, responseBody: true);
+
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers["Authorization"] = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiIiLCJlbWFpbCI6ImNob3N0aW5nNjNAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiZXhwIjoxNjcwNjg1MzI4fQ.B7_yyAyFKO5I1eOPUo6MltP5dzBJi1HRfvo6X2K8KBU";
-    print(
-        "--> ${options.method.toUpperCase()} ${options.baseUrl} ${options.path}");
-    print("Headers:");
-    options.headers.forEach((k, v) => print('$k: $v'));
-    print("queryParameters:");
-    options.queryParameters.forEach((k, v) => print('$k: $v'));
-    if (options.data != null) {
-      print("Body: ${options.data}");
-    }
-    print("--> END ${options.method.toUpperCase()}");
-    return super.onRequest(options, handler);
-  }
-
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    print(
-        "<-- ${response.statusCode} ${response.requestOptions.baseUrl + response.requestOptions.path}");
-    print("Headers:");
-    response.headers.forEach((k, v) => print('$k: $v'));
-    print("Response: ${response.data}");
-    print("<-- END HTTP");
-    return super.onResponse(response, handler);
-  }
-
-  @override
-  void onError(DioError dioError, ErrorInterceptorHandler handler) {
-    print(
-        "<-- ${dioError.message} ${(dioError.response?.requestOptions != null ? ((dioError.response?.requestOptions.baseUrl ?? "") + (dioError.response?.requestOptions.path ?? "")) : 'URL')}");
-    print(
-        "${dioError.response != null ? dioError.response?.data : 'Unknown Error'}");
-    print("<-- End error");
-    return super.onError(dioError, handler);
+    options.headers["Authorization"] =
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjaG9zdGluZzYzQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImV4cCI6MTY3MDg1MzMzN30.yuXKAwnKZ3tfdeXEskNd0aWJKeEy4oyzMDEZsiKOS1o";
+    super.onRequest(options, handler);
   }
 }
