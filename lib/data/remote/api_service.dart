@@ -25,12 +25,3 @@ class ApiService {
     }
   }
 }
-
-class Custom extends LogInterceptor {
-  @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers["Authorization"] =
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiIiLCJlbWFpbCI6ImNob3N0aW5nNjNAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiZXhwIjoxNjcwNjg1MzI4fQ.B7_yyAyFKO5I1eOPUo6MltP5dzBJi1HRfvo6X2K8KBU";
-    super.onRequest(options, handler);
-  }
-}
