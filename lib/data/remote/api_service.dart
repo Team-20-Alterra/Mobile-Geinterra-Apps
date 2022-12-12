@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:geinterra_apps/data/model/Response_invoices.dart';
+import 'package:geinterra_apps/data/model/register_model.dart';
 
 import '../../ui/utils/custom_interceptors.dart';
 
@@ -11,7 +12,7 @@ class ApiService {
   final Dio _dio = Dio();
 
   ApiService() {
-    _dio.interceptors.add(CustomInterceptors(token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjaG9zdGluZzYzQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImV4cCI6MTY3MDg1MzMzN30.yuXKAwnKZ3tfdeXEskNd0aWJKeEy4oyzMDEZsiKOS1o"));
+    _dio.interceptors.add(CustomInterceptors());
   }
 
   Future<ResponseInvoices> fetchInvoice() async {
@@ -21,6 +22,19 @@ class ApiService {
       return ResponseInvoices.fromJson(response.data);
     } on DioError catch (ex) {
       String errorMessage = json.decode(ex.response.toString());
+      throw Exception(errorMessage);
+    }
+  }
+
+  Future<RegisterModel> registerUser(Map<String, dynamic> userRegister) async {
+    try {
+      var response = await _dio.post(
+        "${_baseUrl}/register/user",
+      );
+
+      return RegisterModel.fromJson(response.data);
+    } on DioError catch (e) {
+      String errorMessage = json.decode(e.response.toString())["errorMessage"];
       throw Exception(errorMessage);
     }
   }

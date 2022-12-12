@@ -1,8 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:geinterra_apps/model/register_model.dart';
+import 'package:geinterra_apps/data/remote/api_service.dart';
 import 'package:geinterra_apps/providers/register_view_model.dart';
-import 'package:geinterra_apps/services/register_api.dart';
 import 'package:geinterra_apps/theme.dart';
 import 'package:geinterra_apps/ui/login/login_screen.dart';
 import 'package:geinterra_apps/ui/register/screens/kebijakan_screen.dart';
@@ -20,7 +19,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final RegisterApi _apiRegister = RegisterApi();
+  final ApiService _apiRegister = ApiService();
   final formKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
@@ -155,7 +154,16 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             SizedBox(height: size.height * 0.02),
                             ElevatedButton(
-                              onPressed: _handleRegister,
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  userProvider.register(
+                                      _nameController.text,
+                                      _emailController.text,
+                                      _phoneController.text,
+                                      _passwordController.text,
+                                      context);
+                                }
+                              },
                               child: Text('Buat Akun'),
                               style: ElevatedButton.styleFrom(
                                 primary: Color(0xff297061),
@@ -303,45 +311,5 @@ class _RegisterPageState extends State<RegisterPage> {
         );
       },
     );
-  }
-
-  Future<void> _handleRegister() async {
-    if (formKey.currentState!.validate()) {
-      //show snackbar to indicate loading
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Register sudah berhasil!'),
-        backgroundColor: primaryGreen,
-      ));
-
-      //the user data to be sent
-      Map<String, dynamic> userRegister = {
-        "Name": _nameController.text,
-        "Email": [
-          {
-            "Type": "Primary",
-            "Value": _emailController.text,
-          }
-        ],
-        "Password": _passwordController.text,
-        "Phone": _phoneController.text,
-      };
-
-      //get response from ApiClient
-      dynamic res = await _apiRegister.registerUser(userRegister);
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-
-      //checks if there is no error in the response body.
-      //if error is not present, navigate the users to Login Screen.
-      if (res['ErrorCode'] == null) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const LoginPage()));
-      } else {
-        //if error is present, display a snackbar showing the error messsage
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Error: ${res['Message']}'),
-          backgroundColor: Colors.red.shade300,
-        ));
-      }
-    }
   }
 }
