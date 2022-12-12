@@ -12,7 +12,7 @@ class ApiService {
   final Dio _dio = Dio();
 
   ApiService() {
-    _dio.interceptors.add(CustomInterceptors());
+    _dio.interceptors.add(CustomInterceptors(token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiY2hvc3Rpbmc2M0BnbWFpbC5jb20iLCJyb2xlIjoiQWRtaW4iLCJleHAiOjE2NzExMDU1MTV9.D7N8yDHCPLZ1WCCN_10tvwG2CyJX1hmjZqfryhhLoHU"));
   }
 
   Future<ResponseInvoices> fetchInvoice() async {

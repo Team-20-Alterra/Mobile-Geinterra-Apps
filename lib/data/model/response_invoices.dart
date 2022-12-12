@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 ResponseInvoices responseInvoicesFromJson(String str) =>
     ResponseInvoices.fromJson(json.decode(str));
@@ -34,7 +35,6 @@ class Invoice {
     required this.createdAt,
     required this.updatedAt,
     this.deletedAt,
-    required this.date,
     required this.noInvoice,
     required this.price,
     required this.payment,
@@ -43,11 +43,6 @@ class Invoice {
     required this.status,
     required this.total,
     required this.subTotal,
-    required this.businnesId,
-    required this.year,
-    required this.month,
-    required this.userId,
-    required this.user,
     required this.item,
   });
 
@@ -55,20 +50,14 @@ class Invoice {
   DateTime createdAt;
   DateTime updatedAt;
   dynamic deletedAt;
-  String date;
   String noInvoice;
-  String price;
+  int price;
   String payment;
   String type;
   String statusInvoice;
   String status;
-  String total;
-  String subTotal;
-  int businnesId;
-  int year;
-  int month;
-  int userId;
-  User user;
+  int total;
+  int subTotal;
   List<dynamic> item;
 
   factory Invoice.fromJson(Map<String, dynamic> json) => Invoice(
@@ -76,7 +65,6 @@ class Invoice {
         createdAt: DateTime.parse(json["CreatedAt"]),
         updatedAt: DateTime.parse(json["UpdatedAt"]),
         deletedAt: json["DeletedAt"],
-        date: json["date"],
         noInvoice: json["no_invoice"],
         price: json["price"],
         payment: json["payment"],
@@ -85,11 +73,6 @@ class Invoice {
         status: json["status"],
         total: json["total"],
         subTotal: json["sub_total"],
-        businnesId: json["businnes_id"],
-        year: json["year"],
-        month: json["month"],
-        userId: json["user_id"],
-        user: User.fromJson(json["User"]),
         item: List<dynamic>.from(json["Item"].map((x) => x)),
       );
 
@@ -98,7 +81,6 @@ class Invoice {
         "CreatedAt": createdAt.toIso8601String(),
         "UpdatedAt": updatedAt.toIso8601String(),
         "DeletedAt": deletedAt,
-        "date": date,
         "no_invoice": noInvoice,
         "price": price,
         "payment": payment,
@@ -107,11 +89,6 @@ class Invoice {
         "status": status,
         "total": total,
         "sub_total": subTotal,
-        "businnes_id": businnesId,
-        "year": year,
-        "month": month,
-        "user_id": userId,
-        "User": user.toJson(),
         "Item": List<dynamic>.from(item.map((x) => x)),
       };
 }

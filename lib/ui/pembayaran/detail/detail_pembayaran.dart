@@ -1,13 +1,13 @@
 import 'dart:io';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:geinterra_apps/theme.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:open_file/open_file.dart';
 
 class DetailPembayaran extends StatefulWidget {
   static const routeName = '/detailpembayaran';
+
   const DetailPembayaran({super.key});
 
   @override
@@ -543,10 +543,6 @@ class _DetailPembayaranState extends State<DetailPembayaran> {
     setState(() {
       isLoading = false;
     });
-  }
-
-  void _openFile(PlatformFile file) {
-    OpenFile.open(file.path);
   }
 
 // //fungsi untuk select file

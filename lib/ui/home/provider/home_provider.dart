@@ -7,7 +7,7 @@ import '../../../data/model/Response_invoices.dart';
 
 class HomeProvider extends ChangeNotifier {
   var apiService = ApiService();
-  var state = ResultState.Nothing;
+  var state = ResultState.Loading;
   List<Invoice> list = [];
   var message = "";
 

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:geinterra_apps/ui/home/provider/home_provider.dart';
 import 'package:geinterra_apps/ui/home/widgets/item_invoice.dart';
 import 'package:geinterra_apps/ui/home/widgets/shape_icon.dart';
-import 'package:geinterra_apps/ui/utils/result_state.dart';
 import 'package:geinterra_apps/ui/widgets/circle_img_asset.dart';
 import 'package:geinterra_apps/ui/widgets/title_section.dart';
 import 'package:provider/provider.dart';
+
+import '../utils/result_state.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -53,7 +54,11 @@ class HomePage extends StatelessWidget {
                       );
                     }
                   case ResultState.Loading:
-                    return const Center(child: CircularProgressIndicator());
+                    return const SizedBox(
+                      height: 400,
+                      width: double.infinity,
+                      child: Center(child: CircularProgressIndicator()),
+                    );
                   case ResultState.Error:
                     return Center(child: Text(provider.message));
                   default:

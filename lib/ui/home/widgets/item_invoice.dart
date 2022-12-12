@@ -36,7 +36,7 @@ class ItemTransaction extends StatelessWidget {
                       flex: 1,
                       child: SizedBox(),
                     ),
-                    TitleItem(title: invoice.price),
+                    TitleItem(title: invoice.price.toString()),
                   ],
                 ),
                 const SizedBox(
