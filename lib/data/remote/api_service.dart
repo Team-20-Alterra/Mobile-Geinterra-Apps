@@ -12,9 +12,7 @@ class ApiService {
   final Dio _dio = Dio();
 
   ApiService() {
-    // _dio.interceptors.add(CustomInterceptors());
-    _dio.interceptors
-        .add(LogInterceptor(requestBody: true, responseBody: true));
+    _dio.interceptors.add(CustomInterceptors());
   }
 
   Future<ResponseInvoices> fetchInvoice() async {
@@ -23,7 +21,7 @@ class ApiService {
 
       return ResponseInvoices.fromJson(response.data);
     } on DioError catch (ex) {
-      String errorMessage = json.decode(ex.response.toString())["errorMessage"];
+      String errorMessage = json.decode(ex.response.toString());
       throw Exception(errorMessage);
     }
   }
