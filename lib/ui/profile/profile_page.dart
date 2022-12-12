@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:geinterra_apps/providers/profile_view_model.dart';
 import 'package:geinterra_apps/ui/login/login_screen.dart';
 import 'package:geinterra_apps/ui/profile/kebijakan.dart';
 import 'package:geinterra_apps/ui/profile/sk_page.dart';
 import 'package:geinterra_apps/ui/profile/ubah_akun_page.dart';
 import 'package:geinterra_apps/ui/profile/version.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   static const routeName = '/profilpage';
@@ -16,6 +18,11 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    String email = '';
+    String password = '';
+    final loginProvider = Provider.of<ProfileViewModel>(context);
+    loginProvider.initial();
+
     return Scaffold(
         body: Container(
             color: Colors.white,
@@ -187,7 +194,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: TextStyle(fontSize: 12, color: Colors.red),
                           ),
                           onTap: () {
-                            Navigator.pushNamed(context, LoginPage.routeName);
+                            loginProvider.deleteEmail(email);
+                            loginProvider.deletePassword(password);
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginPage(),
+                              ),
+                            );
                           },
                         ),
                       ],
