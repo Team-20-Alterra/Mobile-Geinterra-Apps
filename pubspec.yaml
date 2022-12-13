@@ -60,7 +60,6 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   http: ^0.13.5
   dotted_border: ^2.0.0+3
-  open_file: ^2.1.1
   file_picker: ^5.2.3
   
 

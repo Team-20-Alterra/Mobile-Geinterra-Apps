@@ -21,7 +21,7 @@ class RegisterViewModel extends ChangeNotifier {
   Future<void> register(String name, String email, String phone,
       String password, BuildContext context) async {
     //the user data to be sent
-    Map<String, dynamic> userRegister = {
+    Map<String, String> userRegister = {
       "name": name,
       "email": email,
       "password": password,

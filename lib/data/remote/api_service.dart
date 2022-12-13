@@ -12,7 +12,7 @@ class ApiService {
   final Dio _dio = Dio();
 
   ApiService() {
-    _dio.interceptors.add(CustomInterceptors());
+    _dio.interceptors.add(CustomInterceptors(token: ''));
   }
 
   Future<ResponseInvoices> fetchInvoice() async {
@@ -26,11 +26,10 @@ class ApiService {
     }
   }
 
-  Future<RegisterModel> registerUser(Map<String, dynamic> userRegister) async {
+  Future<RegisterModel> registerUser(Map<String, String> userRegister) async {
     try {
-      var response = await _dio.post(
-        "${_baseUrl}/register/user",
-      );
+      var response =
+          await _dio.post("${_baseUrl}register/user", data: userRegister);
 
       return RegisterModel.fromJson(response.data);
     } on DioError catch (e) {
