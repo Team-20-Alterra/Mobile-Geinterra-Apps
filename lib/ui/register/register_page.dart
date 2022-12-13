@@ -27,14 +27,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  // @override
-  // void initState() {
-  //   final registerProvider =
-  //       Provider.of<RegisterViewModel>(context, listen: false);
-  //   registerProvider.registerUser(userRegister);
-  //   super.initState();
-  // }
-
   @override
   void dispose() {
     _nameController.dispose();
@@ -162,6 +154,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                       _phoneController.text,
                                       _passwordController.text,
                                       context);
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content:
+                                        const Text('Success Create New User'),
+                                    backgroundColor: primaryGreen,
+                                  ));
                                 }
                               },
                               child: Text('Buat Akun'),
