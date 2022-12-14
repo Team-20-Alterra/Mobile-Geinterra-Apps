@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:geinterra_apps/ui/login/provider/login_provider.dart';
 import 'package:geinterra_apps/ui/login/widgets/rounded_button.dart';
 import 'package:geinterra_apps/ui/login/widgets/text_field_container.dart';
 import 'package:geinterra_apps/ui/register/register_page.dart';
+import 'package:provider/provider.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 import '../home/main_page.dart';
@@ -35,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<LoginProvider>(context, listen: false);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -272,8 +275,10 @@ class _LoginPageState extends State<LoginPage> {
                               RoundedButton(
                                   text: 'Masuk',
                                   press: () {
-                                    Navigator.pushNamed(
-                                        context, MainPage.routeName);
+                                    if (_formKey.currentState!.validate()) {
+                                      userProvider.login(_emailController.text,
+                                          _passwordController.text, context);
+                                    }
                                   }),
                               const SizedBox(
                                 height: 10,
