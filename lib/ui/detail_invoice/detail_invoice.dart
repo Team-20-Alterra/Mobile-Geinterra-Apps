@@ -15,7 +15,9 @@ class DetailInvoice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(title: "Detail Tagihan", back: () {}),
+      appBar: myAppBar(title: "Detail Tagihan", back: () {
+        Navigator.pop(context);
+      }),
       body: Column(
         children: [
           Expanded(
