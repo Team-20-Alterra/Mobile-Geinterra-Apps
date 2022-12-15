@@ -1,6 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:geinterra_apps/data/remote/api_service.dart';
+import 'package:geinterra_apps/data/model/register_model.dart';
 import 'package:geinterra_apps/providers/register_view_model.dart';
 import 'package:geinterra_apps/theme.dart';
 import 'package:geinterra_apps/ui/login/login_screen.dart';
@@ -19,7 +19,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final ApiService _apiRegister = ApiService();
   final formKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
@@ -196,6 +195,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     'Masuk',
                                     style:
                                         semibold12pt.copyWith(color: textBlack),
+                                    semanticsLabel: 'Button Masuk',
                                   ),
                                 ),
                               ],

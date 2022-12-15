@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geinterra_apps/ui/home/main_page.dart';
 import 'package:geinterra_apps/ui/login/login_screen.dart';
 import 'package:geinterra_apps/ui/onboarding/onboarding.dart';
+import 'package:geinterra_apps/ui/payment/payment_status.dart';
 import 'package:geinterra_apps/ui/profile/kebijakan.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_pembayaran.dart';
 import 'package:geinterra_apps/ui/profile/kebijakan.dart';
@@ -46,6 +47,8 @@ MaterialPageRoute? configRouters(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const MetodeBank());
     case MetodeVA.routeName:
       return MaterialPageRoute(builder: (_) => const MetodeVA());
+    case PaymentStatus.routeName:
+      return MaterialPageRoute(builder: (_) => const PaymentStatus());
   }
   assert(false, 'Need to implement ${settings.name}');
   return null;

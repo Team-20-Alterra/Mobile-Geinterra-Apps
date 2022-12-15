@@ -3,7 +3,6 @@ import 'package:geinterra_apps/theme.dart';
 import 'package:geinterra_apps/ui/pembayaran/bantuan/bantuan_pembayaran.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_bank.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_va.dart';
-import 'package:geinterra_apps/ui/widgets/my_appbar.dart';
 
 class MetodePembayaran extends StatefulWidget {
   static const routeName = '/metodepembayaran';
@@ -18,11 +17,23 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(
-          title: "Metode Pembayaran",
-          back: () {
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Color(0xff297061),
+          ),
+          onPressed: () {
             Navigator.pop(context);
-          }),
+          },
+        ),
+        title: Text(
+          'Metode Pembayaran',
+          style: heading6.copyWith(color: primaryGreen),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
