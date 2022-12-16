@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:geinterra_apps/ui/login/login_provider.dart';
 import 'package:geinterra_apps/ui/login/widgets/rounded_button.dart';
 import 'package:geinterra_apps/ui/login/widgets/text_field_container.dart';
 import 'package:geinterra_apps/ui/register/register_page.dart';
+import 'package:provider/provider.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 import '../home/main_page.dart';
@@ -26,6 +28,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _forgotPasswordController =
       TextEditingController();
 
+  late LoginProvider provider;
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -35,6 +39,22 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    provider = context.watch<LoginProvider>();
+    /*switch (provider.state) {
+      case ResultState.Success:
+        Navigator.pushNamed(context, MainPage.routeName);
+        break;
+      case ResultState.Error:
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(provider.message),
+        ));
+        break;
+      case ResultState.Loading:
+        _showProgresDialog();
+        break;
+      default:
+    }*/
+
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -44,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
           child: SingleChildScrollView(
             child: Stack(
               children: [
-                Upside(imgUrl: 'assets/login.jpg'),
+                const Upside(imgUrl: 'assets/login.jpg'),
                 const PageTitleBar(title: 'LOGIN'),
                 Padding(
                   padding: const EdgeInsets.only(top: 320.0),
@@ -92,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                                 child: TextFormField(
                                   controller: _passwordController,
                                   obscureText: _passwordInVisible,
-                                  cursorColor: Color(0xff297061),
+                                  cursorColor: const Color(0xff297061),
                                   decoration: InputDecoration(
                                       icon: const Icon(
                                         Icons.lock_outline,
@@ -199,8 +219,6 @@ class _LoginPageState extends State<LoginPage> {
                                                           Navigator.of(context)
                                                               .pop();
                                                         },
-                                                        child:
-                                                            const Text('Batal'),
                                                         style: ButtonStyle(
                                                             foregroundColor:
                                                                 MaterialStateProperty.all(
@@ -208,15 +226,16 @@ class _LoginPageState extends State<LoginPage> {
                                                                         .white),
                                                             backgroundColor:
                                                                 MaterialStateProperty.all(
-                                                                    Color(
+                                                                    const Color(
                                                                         0xff498679)),
                                                             shape: MaterialStateProperty.all<
                                                                     RoundedRectangleBorder>(
                                                                 RoundedRectangleBorder(
                                                                     borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            15),
-                                                                    side: BorderSide(color: Color(0xff297061))))),
+                                                                        BorderRadius.circular(15),
+                                                                    side: const BorderSide(color: Color(0xff297061))))),
+                                                        child:
+                                                            const Text('Batal'),
                                                       ),
                                                     ),
                                                     const SizedBox(
@@ -228,8 +247,6 @@ class _LoginPageState extends State<LoginPage> {
                                                           Navigator.of(context)
                                                               .pop();
                                                         },
-                                                        child:
-                                                            const Text('Kirim'),
                                                         style: ButtonStyle(
                                                             foregroundColor:
                                                                 MaterialStateProperty.all(
@@ -237,15 +254,16 @@ class _LoginPageState extends State<LoginPage> {
                                                                         .white),
                                                             backgroundColor:
                                                                 MaterialStateProperty.all(
-                                                                    Color(
+                                                                    const Color(
                                                                         0xff297061)),
                                                             shape: MaterialStateProperty.all<
                                                                     RoundedRectangleBorder>(
                                                                 RoundedRectangleBorder(
                                                                     borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            15),
-                                                                    side: BorderSide(color: Colors.white)))),
+                                                                        BorderRadius.circular(15),
+                                                                    side: const BorderSide(color: Colors.white)))),
+                                                        child:
+                                                            const Text('Kirim'),
                                                       ),
                                                     )
                                                   ],
@@ -272,8 +290,13 @@ class _LoginPageState extends State<LoginPage> {
                               RoundedButton(
                                   text: 'Masuk',
                                   press: () {
-                                    Navigator.pushNamed(
-                                        context, MainPage.routeName);
+                                    provider.login(
+                                        _emailController.text,
+                                        _passwordController.text,
+                                        () => {
+                                              Navigator.pushNamed(
+                                                  context, MainPage.routeName)
+                                            });
                                   }),
                               const SizedBox(
                                 height: 10,
@@ -324,6 +347,18 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _showProgresDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }
