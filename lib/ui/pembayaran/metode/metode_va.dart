@@ -85,7 +85,8 @@ class _MetodeVAState extends State<MetodeVA> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16.0),
                           image: DecorationImage(
-                            image: AssetImage('assets/BNI.jpg'),
+                            image: NetworkImage(
+                                "https://upload.wikimedia.org/wikipedia/id/thumb/5/55/BNI_logo.svg/1200px-BNI_logo.svg.png"),
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -169,7 +170,8 @@ class _MetodeVAState extends State<MetodeVA> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16.0),
                           image: DecorationImage(
-                            image: AssetImage('assets/bri.jpg'),
+                            image: NetworkImage(
+                                "https://i2.wp.com/febi.uinsaid.ac.id/wp-content/uploads/2020/11/Logo-BRI-Bank-Rakyat-Indonesia-PNG-Terbaru.png?ssl=1"),
                             fit: BoxFit.contain,
                           ),
                         ),

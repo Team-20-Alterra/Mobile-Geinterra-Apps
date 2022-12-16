@@ -46,7 +46,7 @@ class ApiService {
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
 
     final response = await dio.get(
-        'http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/list-bank/businness');
+        'http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/banks');
 
     final results = BankModel.fromJson(response.data);
 
