@@ -6,6 +6,7 @@ import 'package:geinterra_apps/ui/detail_invoice/detail_invoice.dart';
 import 'package:geinterra_apps/ui/landingpage/landing_page.dart';
 import 'package:geinterra_apps/ui/login/login_screen.dart';
 import 'package:geinterra_apps/ui/home/provider/home_provider.dart';
+import 'package:geinterra_apps/ui/login/provider/login_provider.dart';
 import 'package:geinterra_apps/ui/onboarding/onboarding.dart';
 import 'package:geinterra_apps/ui/pembayaran/detail/detail_pembayaran.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_pembayaran.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => HomeProvider(),
         ),
+        ChangeNotifierProvider(create: (_) => LoginProvider()),
         ChangeNotifierProvider(
           create: (_) => ProfileViewModel(),
         ),
