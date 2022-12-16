@@ -22,6 +22,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  final GlobalKey<State> _keyLoader = GlobalKey<State>();
   bool _passwordInVisible = true;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -40,21 +41,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     provider = context.watch<LoginProvider>();
-    /*switch (provider.state) {
-      case ResultState.Success:
-        Navigator.pushNamed(context, MainPage.routeName);
-        break;
-      case ResultState.Error:
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(provider.message),
-        ));
-        break;
-      case ResultState.Loading:
-        _showProgresDialog();
-        break;
-      default:
-    }*/
-
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -289,14 +275,23 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               RoundedButton(
                                   text: 'Masuk',
-                                  press: () {
-                                    provider.login(
-                                        _emailController.text,
-                                        _passwordController.text,
-                                        () => {
-                                              Navigator.pushNamed(
-                                                  context, MainPage.routeName)
-                                            });
+                                  press: () async {
+                                    try {
+                                      Dialogs.showLoadingDialog(
+                                          context, _keyLoader);
+
+                                      await provider.login(
+                                          _emailController.text,
+                                          _passwordController.text);
+
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop();
+
+                                      Navigator.pushNamed(
+                                          context, MainPage.routeName);
+                                    } catch (error) {
+                                      debugPrint(error.toString());
+                                    }
                                   }),
                               const SizedBox(
                                 height: 10,
@@ -360,5 +355,29 @@ class _LoginPageState extends State<LoginPage> {
         );
       },
     );
+  }
+}
+
+class Dialogs {
+  static Future<void> showLoadingDialog(
+      BuildContext context, GlobalKey key) async {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return WillPopScope(
+              onWillPop: () async => false,
+              child: SimpleDialog(key: key, children: <Widget>[
+                Center(
+                  child: Column(children: const [
+                    CircularProgressIndicator(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text("Please Wait....")
+                  ]),
+                )
+              ]));
+        });
   }
 }

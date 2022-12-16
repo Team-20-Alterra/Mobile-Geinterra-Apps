@@ -15,8 +15,7 @@ class LoginProvider extends ChangeNotifier {
 
   LoginProvider(this.pref);
 
-  Future<dynamic> login(
-      String email, String password, Function() success) async {
+  Future<dynamic> login(String email, String password) async {
     state = ResultState.Loading;
     notifyListeners();
 
@@ -30,7 +29,6 @@ class LoginProvider extends ChangeNotifier {
       pref.setToken(responseLogin.data.token);
       state = ResultState.Success;
       notifyListeners();
-      success();
     } on DioError catch (e) {
       message = e.message;
       state = ResultState.Error;
