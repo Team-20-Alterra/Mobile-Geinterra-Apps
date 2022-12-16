@@ -12,7 +12,7 @@ PreferredSizeWidget myAppBar({required String title, required Function back}) =>
           Icons.arrow_back,
           color: MyColors.myGreen,
         ),
-        onPressed: () => back,
+        onPressed: back(),
       ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

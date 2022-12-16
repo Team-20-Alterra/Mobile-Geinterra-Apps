@@ -3,9 +3,6 @@ import 'package:geinterra_apps/theme.dart';
 import 'package:geinterra_apps/ui/pembayaran/bantuan/bantuan_pembayaran.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_bank.dart';
 import 'package:geinterra_apps/ui/pembayaran/metode/metode_va.dart';
-import 'package:geinterra_apps/ui/widgets/my_appbar.dart';
-
-import '../detail/detail_pembayaran.dart';
 
 class MetodePembayaran extends StatefulWidget {
   static const routeName = '/metodepembayaran';
@@ -19,13 +16,24 @@ class MetodePembayaran extends StatefulWidget {
 class _MetodePembayaranState extends State<MetodePembayaran> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: myAppBar(
-          title: "Metode Pembayaran",
-          back: () {
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Color(0xff297061),
+          ),
+          onPressed: () {
             Navigator.pop(context);
-          }),
+          },
+        ),
+        title: Text(
+          'Metode Pembayaran',
+          style: heading6.copyWith(color: primaryGreen),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -61,8 +69,9 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
                         style: regular14pt.copyWith(color: textBlack),
                       ),
                     ),
-                    IconButton(
-                      icon: Icon(
+                    Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Icon(
                         Icons.chevron_right_rounded,
                         size: 24.0,
                       ),
@@ -92,14 +101,15 @@ class _MetodePembayaranState extends State<MetodePembayaran> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.0),
                       child: Text(
                         'Virtual Akun',
                         style: regular14pt.copyWith(color: textBlack),
                       ),
                     ),
-                    IconButton(
-                      icon: Icon(
+                    Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Icon(
                         Icons.chevron_right_rounded,
                         size: 24.0,
                       ),
