@@ -276,21 +276,24 @@ class _LoginPageState extends State<LoginPage> {
                               RoundedButton(
                                   text: 'Masuk',
                                   press: () async {
-                                    try {
-                                      Dialogs.showLoadingDialog(
-                                          context, _keyLoader);
+                                    if (_formKey.currentState!.validate()) {
+                                      try {
+                                        Dialogs.showLoadingDialog(
+                                            context, _keyLoader);
 
-                                      await provider.login(
-                                          _emailController.text,
-                                          _passwordController.text);
+                                        await provider.login(
+                                            _emailController.text,
+                                            _passwordController.text);
 
-                                      Navigator.of(context, rootNavigator: true)
-                                          .pop();
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop();
 
-                                      Navigator.pushNamed(
-                                          context, MainPage.routeName);
-                                    } catch (error) {
-                                      debugPrint(error.toString());
+                                        Navigator.pushNamed(
+                                            context, MainPage.routeName);
+                                      } catch (error) {
+                                        debugPrint(error.toString());
+                                      }
                                     }
                                   }),
                               const SizedBox(
