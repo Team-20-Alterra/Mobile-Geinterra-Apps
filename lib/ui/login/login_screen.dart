@@ -42,6 +42,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final userLogin = Provider.of<LoginProvider>(context, listen: false);
     userLogin.checkLogin(context);
+    provider = context.watch<LoginProvider>();
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -275,53 +276,28 @@ class _LoginPageState extends State<LoginPage> {
                                 height: 8,
                               ),
                               RoundedButton(
-                                text: 'Masuk',
-                                press: () async {
-                                  if (_formKey.currentState!.validate()) {
-                                    try {
-                                      Dialogs.showLoadingDialog(
-                                          context, _keyLoader);
+                                  text: 'Masuk',
+                                  press: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      try {
+                                        Dialogs.showLoadingDialog(
+                                            context, _keyLoader);
 
-                                      await provider.login(
-                                          _emailController.text,
-                                          _passwordController.text);
+                                        await provider.login(
+                                            _emailController.text,
+                                            _passwordController.text);
 
-                                      Navigator.of(context, rootNavigator: true)
-                                          .pop();
-                                      Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => MainPage(),
-                                        ),
-                                        (route) => false,
-                                      );
-                                      // Navigator.pushNamed(
-                                      //     context, MainPage.routeName);
-                                    } catch (error) {
-                                      debugPrint(error.toString());
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop();
+
+                                        Navigator.pushNamed(
+                                            context, MainPage.routeName);
+                                      } catch (error) {
+                                        debugPrint(error.toString());
+                                      }
                                     }
-                                  }
-                                },
-                                // press: () {
-                                //   if (_formKey.currentState!.validate()) {
-                                //     userLogin.login(
-                                //       _emailController.text,
-                                //       _passwordController.text,
-                                //     );
-                                //     userLogin.addBool(false);
-                                //     userLogin.setPassword(
-                                //         _passwordController.text);
-                                //     userLogin.setEmail(_emailController.text);
-                                //     Navigator.pushAndRemoveUntil(
-                                //       context,
-                                //       MaterialPageRoute(
-                                //         builder: (context) => MainPage(),
-                                //       ),
-                                //       (route) => false,
-                                //     );
-                                //   }
-                                // }
-                              ),
+                                  }),
                               const SizedBox(
                                 height: 10,
                               ),
