@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:geinterra_apps/data/model/Response_invoices.dart';
 import 'package:geinterra_apps/data/model/bank_model.dart';
-import 'package:geinterra_apps/data/model/login_model.dart';
 import 'package:geinterra_apps/data/model/register_model.dart';
 import 'package:geinterra_apps/data/model/response_login.dart';
 
@@ -40,6 +39,17 @@ class ApiService {
           await _dio.post("${_baseUrl}register/user", data: userRegister);
 
       return RegisterModel.fromJson(response.data);
+    } on DioError catch (e) {
+      String errorMessage = json.decode(e.response.toString())["errorMessage"];
+      throw Exception(errorMessage);
+    }
+  }
+
+  Future<ResponseLogin> login(Map<String, String> loginBody) async {
+    try {
+      var response = await _dio.post("${_baseUrl}login", data: loginBody);
+
+      return ResponseLogin.fromJson(response.data);
     } on DioError catch (e) {
       String errorMessage = json.decode(e.response.toString())["errorMessage"];
       throw Exception(errorMessage);

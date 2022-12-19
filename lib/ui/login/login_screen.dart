@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geinterra_apps/ui/login/login_provider.dart';
 import 'package:geinterra_apps/ui/login/widgets/rounded_button.dart';
 import 'package:geinterra_apps/ui/login/widgets/text_field_container.dart';
 import 'package:geinterra_apps/ui/register/register_page.dart';
@@ -39,6 +40,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userLogin = Provider.of<LoginProvider>(context, listen: false);
+    userLogin.checkLogin(context);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -272,11 +275,53 @@ class _LoginPageState extends State<LoginPage> {
                                 height: 8,
                               ),
                               RoundedButton(
-                                  text: 'Masuk',
-                                  press: () {
-                                    Navigator.pushNamed(
-                                        context, MainPage.routeName);
-                                  }),
+                                text: 'Masuk',
+                                press: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    try {
+                                      Dialogs.showLoadingDialog(
+                                          context, _keyLoader);
+
+                                      await provider.login(
+                                          _emailController.text,
+                                          _passwordController.text);
+
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop();
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MainPage(),
+                                        ),
+                                        (route) => false,
+                                      );
+                                      // Navigator.pushNamed(
+                                      //     context, MainPage.routeName);
+                                    } catch (error) {
+                                      debugPrint(error.toString());
+                                    }
+                                  }
+                                },
+                                // press: () {
+                                //   if (_formKey.currentState!.validate()) {
+                                //     userLogin.login(
+                                //       _emailController.text,
+                                //       _passwordController.text,
+                                //     );
+                                //     userLogin.addBool(false);
+                                //     userLogin.setPassword(
+                                //         _passwordController.text);
+                                //     userLogin.setEmail(_emailController.text);
+                                //     Navigator.pushAndRemoveUntil(
+                                //       context,
+                                //       MaterialPageRoute(
+                                //         builder: (context) => MainPage(),
+                                //       ),
+                                //       (route) => false,
+                                //     );
+                                //   }
+                                // }
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),

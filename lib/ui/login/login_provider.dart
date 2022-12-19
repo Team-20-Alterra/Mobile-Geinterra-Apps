@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:geinterra_apps/data/local/shared_pref.dart';
 import 'package:geinterra_apps/data/model/response_login.dart';
 import 'package:geinterra_apps/data/remote/api_service.dart';
+import 'package:geinterra_apps/ui/home/main_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/result_state.dart';
 
@@ -12,6 +15,16 @@ class LoginProvider extends ChangeNotifier {
   var message = "";
   late ResponseLogin responseLogin;
   final SharedPref pref;
+
+  late SharedPreferences logindata;
+
+  bool _newUser = false;
+  String _password = '';
+  String _email = '';
+
+  bool get newUser => _newUser;
+  String get password => _password;
+  String get email => _email;
 
   LoginProvider(this.pref);
 
@@ -34,5 +47,44 @@ class LoginProvider extends ChangeNotifier {
       state = ResultState.Error;
       notifyListeners();
     }
+  }
+
+  Future<void> checkLogin(BuildContext context) async {
+    logindata = await SharedPreferences.getInstance();
+    _newUser = logindata.getBool('login') ?? true;
+    if (newUser == false) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MainPage(),
+          ),
+          (route) => false);
+    }
+    notifyListeners();
+  }
+
+  Future<void> addBool(bool a) async {
+    logindata = await SharedPreferences.getInstance();
+    logindata.setBool('login', a);
+    notifyListeners();
+  }
+
+  Future<void> setPassword(String password) async {
+    logindata = await SharedPreferences.getInstance();
+    logindata.setString('password', password);
+    notifyListeners();
+  }
+
+  Future<void> setEmail(String email) async {
+    logindata = await SharedPreferences.getInstance();
+    logindata.setString('email', email);
+    notifyListeners();
+  }
+
+  Future<void> initial() async {
+    logindata = await SharedPreferences.getInstance();
+    _email = logindata.getString('email').toString();
+    _password = logindata.getString('password').toString();
+    notifyListeners();
   }
 }
