@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geinterra_apps/ui/home/provider/home_provider.dart';
 import 'package:geinterra_apps/ui/home/widgets/item_invoice.dart';
 import 'package:geinterra_apps/ui/home/widgets/shape_icon.dart';
+import 'package:geinterra_apps/ui/pembayaran/metode/metode_pembayaran.dart';
 import 'package:geinterra_apps/ui/widgets/circle_img_asset.dart';
 import 'package:geinterra_apps/ui/widgets/title_section.dart';
 import 'package:provider/provider.dart';
@@ -203,8 +204,18 @@ class HomePage extends StatelessWidget {
             flex: 1,
             child: SizedBox(),
           ),
-          const ShapeIcon(
-              width: 60, height: 60, icon: Icons.notifications_outlined)
+          IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MetodePembayaran()));
+            },
+            icon: Icon(Icons.notifications_outlined),
+            style: ButtonStyle(
+              minimumSize: MaterialStateProperty.all(const Size(60, 60)),
+            ),
+          ),
+          // const ShapeIcon(
+          //     width: 60, height: 60, icon: Icons.notifications_outlined)
         ],
       ),
     );

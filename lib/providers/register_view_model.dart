@@ -26,10 +26,10 @@ class RegisterViewModel extends ChangeNotifier {
     //get response from ApiClient
     try {
       final res = await apiService.registerUser(userRegister);
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //   content: Text('Success Create New User'),
-      //   backgroundColor: primaryGreen,
-      // ));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Success Create New User'),
+        backgroundColor: primaryGreen,
+      ));
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const LoginPage()));
     } catch (e) {

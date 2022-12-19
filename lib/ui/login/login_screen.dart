@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:geinterra_apps/ui/login/provider/login_provider.dart';
 import 'package:geinterra_apps/ui/login/widgets/rounded_button.dart';
 import 'package:geinterra_apps/ui/login/widgets/text_field_container.dart';
 import 'package:geinterra_apps/ui/register/register_page.dart';
+import 'package:provider/provider.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 import '../home/main_page.dart';
@@ -35,6 +37,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userLogin = Provider.of<LoginProvider>(context, listen: false);
+    userLogin.checkLogin(context);
+
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -119,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                                       border: InputBorder.none),
                                   validator: Validators.compose([
                                     Validators.required(
-                                        'email tidak boleh kosong'),
+                                        'password tidak boleh kosong'),
                                   ]),
                                 ),
                               ),
@@ -272,8 +277,24 @@ class _LoginPageState extends State<LoginPage> {
                               RoundedButton(
                                   text: 'Masuk',
                                   press: () {
-                                    Navigator.pushNamed(
-                                        context, MainPage.routeName);
+                                    if (_formKey.currentState!.validate()) {
+                                      userLogin.login(
+                                        _emailController.text,
+                                        _passwordController.text,
+                                        context,
+                                      );
+                                      userLogin.addBool(false);
+                                      userLogin.setPassword(
+                                          _passwordController.text);
+                                      userLogin.setEmail(_emailController.text);
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MainPage(),
+                                        ),
+                                        (route) => false,
+                                      );
+                                    }
                                   }),
                               const SizedBox(
                                 height: 10,
@@ -288,7 +309,7 @@ class _LoginPageState extends State<LoginPage> {
                                   children: [
                                     IconButton(
                                         onPressed: () {},
-                                        icon: const Icon(Icons.apple)),
+                                        icon: const Icon(Icons.g_mobiledata)),
                                     IconButton(
                                         onPressed: () {},
                                         icon: const Icon(Icons.facebook)),

@@ -1,6 +1,5 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:geinterra_apps/data/model/register_model.dart';
 import 'package:geinterra_apps/providers/register_view_model.dart';
 import 'package:geinterra_apps/theme.dart';
 import 'package:geinterra_apps/ui/login/login_screen.dart';
@@ -30,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
   // void initState() {
   //   final registerProvider =
   //       Provider.of<RegisterViewModel>(context, listen: false);
-  //   registerProvider.registerUser(userRegister);
+  //   registerProvider.registerUser();
   //   super.initState();
   // }
 
@@ -46,168 +45,145 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final userProvider = Provider.of<RegisterViewModel>(context, listen: false);
-
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          color: Color.fromARGB(255, 242, 242, 242),
-          child: Stack(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Icon(
-                    Icons.account_circle_outlined,
-                    size: 160.0,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50.0),
-                        topRight: Radius.circular(50.0),
-                      ),
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            color: Color.fromARGB(255, 242, 242, 242),
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Icon(
+                      Icons.account_circle_outlined,
+                      size: 160.0,
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Form(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        key: formKey,
-                        child: Column(
-                          children: [
-                            Text(
-                              'Buat Akun',
-                              style: heading6.copyWith(),
-                            ),
-                            SizedBox(height: size.height * 0.02),
-                            _buildTextFieldName(),
-                            SizedBox(height: size.height * 0.012),
-                            _buildTextFieldPhone(),
-                            SizedBox(height: size.height * 0.012),
-                            _buildTextFieldEmail(),
-                            SizedBox(height: size.height * 0.012),
-                            _buildTextFieldPassword(),
-                            SizedBox(height: size.height * 0.012),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                CustomCheckbox(),
-                                SizedBox(width: size.width * 0.02),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Saya menyetujui',
-                                          style: regular10pt.copyWith(
-                                              color: textBlack),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        SyaratScreen()));
-                                          },
-                                          child: Text(
-                                            'syarat ketentuan',
-                                            style: bold10.copyWith(
-                                                color: textBlue),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(50.0),
+                          topRight: Radius.circular(50.0),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Form(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          key: formKey,
+                          child: Column(
+                            children: [
+                              Text(
+                                'Buat Akun',
+                                style: heading6.copyWith(),
+                              ),
+                              SizedBox(height: size.height * 0.02),
+                              _buildTextFieldName(),
+                              SizedBox(height: size.height * 0.012),
+                              _buildTextFieldPhone(),
+                              SizedBox(height: size.height * 0.012),
+                              _buildTextFieldEmail(),
+                              SizedBox(height: size.height * 0.012),
+                              _buildTextFieldPassword(),
+                              SizedBox(height: size.height * 0.012),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  CustomCheckbox(),
+                                  SizedBox(width: size.width * 0.02),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Saya menyetujui',
+                                            style: regular10pt.copyWith(
+                                                color: textBlack),
                                           ),
-                                        ),
-                                        Text(
-                                          'dan',
-                                          style: regular10pt.copyWith(
-                                              color: textBlack),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        KebijakanScreen()));
-                                          },
-                                          child: Text(
-                                            'kebijakan privasi',
-                                            style: bold10.copyWith(
-                                                color: textBlue),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          SyaratScreen()));
+                                            },
+                                            child: Text(
+                                              'syarat ketentuan',
+                                              style: bold10.copyWith(
+                                                  color: textBlue),
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      'bersedia menerima informasi dari Ginap',
-                                      style: regular10pt.copyWith(
+                                          Text(
+                                            'dan',
+                                            style: regular10pt.copyWith(
+                                                color: textBlack),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          KebijakanScreen()));
+                                            },
+                                            child: Text(
+                                              'kebijakan privasi',
+                                              style: bold10.copyWith(
+                                                  color: textBlue),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        'bersedia menerima informasi dari Ginap',
+                                        style: regular10pt.copyWith(
+                                            color: textBlack),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: size.height * 0.02),
+                              BuildButton(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Sudah punya akun?',
+                                    style:
+                                        regular12pt.copyWith(color: textBlack),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const LoginPage()));
+                                    },
+                                    child: Text(
+                                      'Masuk',
+                                      style: semibold12pt.copyWith(
                                           color: textBlack),
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: size.height * 0.02),
-                            ElevatedButton(
-                              onPressed: () {
-                                if (formKey.currentState!.validate()) {
-                                  userProvider.register(
-                                      _nameController.text,
-                                      _emailController.text,
-                                      _phoneController.text,
-                                      _passwordController.text,
-                                      context);
-                                }
-                              },
-                              child: Text('Buat Akun'),
-                              style: ElevatedButton.styleFrom(
-                                primary: Color(0xff297061),
-                                minimumSize: Size(350.0, 50.0),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(12),
                                   ),
-                                ),
-                                textStyle:
-                                    semibold12pt.copyWith(color: textWhite),
+                                ],
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Sudah punya akun?',
-                                  style: regular12pt.copyWith(color: textBlack),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const LoginPage()));
-                                  },
-                                  child: Text(
-                                    'Masuk',
-                                    style:
-                                        semibold12pt.copyWith(color: textBlack),
-                                    semanticsLabel: 'Button Masuk',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -310,6 +286,34 @@ class _RegisterPageState extends State<RegisterPage> {
           },
         );
       },
+    );
+  }
+
+  Widget BuildButton() {
+    final userProvider = Provider.of<RegisterViewModel>(context, listen: false);
+    return ElevatedButton(
+      onPressed: () {
+        if (formKey.currentState!.validate()) {
+          userProvider.register(_nameController.text, _emailController.text,
+              _phoneController.text, _passwordController.text, context);
+        }
+        // ScaffoldMessenger.of(context)
+        //     .showSnackBar(SnackBar(
+        //   content: Text('Success Create New User'),
+        //   backgroundColor: primaryGreen,
+        // ));
+      },
+      child: Text('Buat Akun'),
+      style: ElevatedButton.styleFrom(
+        primary: Color(0xff297061),
+        minimumSize: Size(350.0, 50.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(12),
+          ),
+        ),
+        textStyle: semibold12pt.copyWith(color: textWhite),
+      ),
     );
   }
 }
