@@ -14,9 +14,13 @@ class MetodeBank extends StatefulWidget {
   State<MetodeBank> createState() => _MetodeBankState();
 }
 
-enum Bank { BNI, BCA, BRI, Mandiri, BSI, Jenius, CIMB }
+// List<BankModel> data = new List();
+
+enum MBank { $name, $logo, $iD }
 
 class _MetodeBankState extends State<MetodeBank> {
+  get data => null;
+
   @override
   void initState() {
     final bankProvider = Provider.of<BankViewModel>(context, listen: false);
@@ -24,7 +28,7 @@ class _MetodeBankState extends State<MetodeBank> {
     super.initState();
   }
 
-  Bank? radioValue;
+  Bank? bank;
 
   final bankModel = BankModel();
 
@@ -66,343 +70,100 @@ class _MetodeBankState extends State<MetodeBank> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // BNI
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: primaryGrey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(18.0),
-                      ),
-                    ),
-                    child: RadioListTile<Bank>(
-                      secondary: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          image: DecorationImage(
-                            image: AssetImage('assets/BNI.jpg'),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: Bank.BNI,
-                      groupValue: radioValue,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            radioValue = value;
-                          },
-                        );
-                      },
-                      activeColor: primaryGreen,
-                      title: Text(
-                        'BNI',
-                        style: semibold16pt.copyWith(color: textBlack),
-                      ),
-                    ),
-                  ),
-                  // BCA
-                  SizedBox(height: 16.0),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: primaryGrey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(18.0),
-                      ),
-                    ),
-                    child: RadioListTile<Bank>(
-                      secondary: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          image: DecorationImage(
-                            image: AssetImage('assets/bca.jpg'),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: Bank.BCA,
-                      groupValue: radioValue,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            radioValue = value;
-                          },
-                        );
-                      },
-                      activeColor: primaryGreen,
-                      title: Text(
-                        'BCA',
-                        style: semibold16pt.copyWith(color: textBlack),
-                      ),
-                    ),
-                  ),
-                  // BRI
-                  SizedBox(height: 16.0),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: primaryGrey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(18.0),
-                      ),
-                    ),
-                    child: RadioListTile<Bank>(
-                      secondary: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          image: DecorationImage(
-                            image: AssetImage('assets/bri.jpg'),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: Bank.BRI,
-                      groupValue: radioValue,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            radioValue = value;
-                          },
-                        );
-                      },
-                      activeColor: primaryGreen,
-                      title: Text(
-                        'BRI',
-                        style: semibold16pt.copyWith(color: textBlack),
-                      ),
-                    ),
-                  ),
-                  // Mandiri
-                  SizedBox(height: 16.0),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: primaryGrey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(18.0),
-                      ),
-                    ),
-                    child: RadioListTile<Bank>(
-                      secondary: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          image: DecorationImage(
-                            image: AssetImage('assets/mandiri.png'),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: Bank.Mandiri,
-                      groupValue: radioValue,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            radioValue = value;
-                          },
-                        );
-                      },
-                      activeColor: primaryGreen,
-                      title: Text(
-                        'Mandiri',
-                        style: semibold16pt.copyWith(color: textBlack),
-                      ),
-                    ),
-                  ),
-                  // BSI
-                  SizedBox(height: 16.0),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: primaryGrey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(18.0),
-                      ),
-                    ),
-                    child: RadioListTile<Bank>(
-                      secondary: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          image: DecorationImage(
-                            image: AssetImage('assets/bsi.png'),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: Bank.BSI,
-                      groupValue: radioValue,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            radioValue = value;
-                          },
-                        );
-                      },
-                      activeColor: primaryGreen,
-                      title: Text(
-                        'BSI',
-                        style: semibold16pt.copyWith(color: textBlack),
-                      ),
-                    ),
-                  ),
-                  // Jenius / BTPN
-                  SizedBox(height: 16.0),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: primaryGrey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(18.0),
-                      ),
-                    ),
-                    child: RadioListTile<Bank>(
-                      secondary: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          image: DecorationImage(
-                            image: AssetImage('assets/jenius.jpg'),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: Bank.Jenius,
-                      groupValue: radioValue,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            radioValue = value;
-                          },
-                        );
-                      },
-                      activeColor: primaryGreen,
-                      title: Text(
-                        'Jenius/BTPN',
-                        style: semibold16pt.copyWith(color: textBlack),
-                      ),
-                    ),
-                  ),
-                  // CIMB/CIMB Syariah
-                  SizedBox(height: 16.0),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: primaryGrey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(18.0),
-                      ),
-                    ),
-                    child: RadioListTile<Bank>(
-                      secondary: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          image: DecorationImage(
-                            image: AssetImage('assets/CIMB.png'),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: Bank.CIMB,
-                      groupValue: radioValue,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            radioValue = value;
-                          },
-                        );
-                      },
-                      activeColor: primaryGreen,
-                      title: Text(
-                        'CIMB/CIMB Syariah',
-                        style: semibold16pt.copyWith(color: textBlack),
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  Text(
-                    'Total Harga',
-                    style: regular16pt.copyWith(color: textBlack),
-                  ),
-                  Text(
-                    'Rp. 37.000',
-                    style: heading10.copyWith(color: textBlack),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    width: double.infinity,
-                    height: size.height * 0.06,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: ElevatedButton(
-                        onPressed: radioValue != null
-                            ? () {
-                                if (isButtonActive) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailPembayaran(),
-                                    ),
-                                  );
-                                }
-                              }
-                            : null,
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: primaryGreen),
-                        child: Text(
-                          'Lanjutkan',
-                          style: semibold16pt.copyWith(color: textWhite),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+          : ListView.separated(
+              separatorBuilder: (context, index) => Divider(
+                color: Colors.green,
               ),
+              itemCount: data == null ? 0 : data.length,
+              itemBuilder: (BuildContext context, i) {
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // BNI
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: primaryGrey,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(18.0),
+                          ),
+                        ),
+                        child: RadioListTile<MBank>(
+                          secondary: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16.0),
+                              image: DecorationImage(
+                                image: NetworkImage(bank!.logo!),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                          controlAffinity: ListTileControlAffinity.trailing,
+                          value: MBank.$iD,
+                          groupValue: data[i].selectedValue,
+                          onChanged: (value) {
+                            setState(
+                              () {
+                                bank = value as Bank?;
+                              },
+                            );
+                          },
+                          activeColor: primaryGreen,
+                          title: Text(
+                            bank!.name!,
+                            style: semibold16pt.copyWith(color: textBlack),
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        'Total Harga',
+                        style: regular16pt.copyWith(color: textBlack),
+                      ),
+                      Text(
+                        'Rp. 37.000',
+                        style: heading10.copyWith(color: textBlack),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        width: double.infinity,
+                        height: size.height * 0.06,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: ElevatedButton(
+                            onPressed: bank != null
+                                ? () {
+                                    if (isButtonActive) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              DetailPembayaran(),
+                                        ),
+                                      );
+                                    }
+                                  }
+                                : null,
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: primaryGreen),
+                            child: Text(
+                              'Lanjutkan',
+                              style: semibold16pt.copyWith(color: textWhite),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
     );
   }

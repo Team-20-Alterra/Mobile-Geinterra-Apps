@@ -20,8 +20,8 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     String email = '';
     String password = '';
-    final loginProvider = Provider.of<ProfileViewModel>(context);
-    loginProvider.initial();
+    final profileProvider = Provider.of<ProfileViewModel>(context);
+    profileProvider.initial();
 
     return Scaffold(
         body: Container(
@@ -194,8 +194,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: TextStyle(fontSize: 12, color: Colors.red),
                           ),
                           onTap: () {
-                            loginProvider.deleteEmail(email);
-                            loginProvider.deletePassword(password);
+                            profileProvider.addBool(true);
+                            profileProvider.deleteEmail(email);
+                            profileProvider.deletePassword(password);
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

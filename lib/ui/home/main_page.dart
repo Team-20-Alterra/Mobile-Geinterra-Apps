@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geinterra_apps/ui/bill/bill_page.dart';
 import 'package:geinterra_apps/ui/home/home_page.dart';
+import 'package:geinterra_apps/ui/home/provider/home_provider.dart';
 import 'package:geinterra_apps/ui/profile/profile_page.dart';
+import 'package:geinterra_apps/ui/utils/result_state.dart';
+import 'package:provider/provider.dart';
 
 import '../utils/colors.dart';
 
@@ -31,10 +34,18 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    final homeProvider = Provider.of<HomeProvider>(context, listen: true);
+    final isLoading = homeProvider.state == ResultState.Loading;
+    final isError = homeProvider.state == ResultState.Error;
+
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Center(
+              child: _widgetOptions.elementAt(_selectedIndex),
+            ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(

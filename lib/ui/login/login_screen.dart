@@ -37,7 +37,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<LoginProvider>(context, listen: false);
+    final userLogin = Provider.of<LoginProvider>(context, listen: false);
+    userLogin.checkLogin(context);
+
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -122,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                                       border: InputBorder.none),
                                   validator: Validators.compose([
                                     Validators.required(
-                                        'email tidak boleh kosong'),
+                                        'password tidak boleh kosong'),
                                   ]),
                                 ),
                               ),
@@ -276,8 +278,22 @@ class _LoginPageState extends State<LoginPage> {
                                   text: 'Masuk',
                                   press: () {
                                     if (_formKey.currentState!.validate()) {
-                                      userProvider.login(_emailController.text,
-                                          _passwordController.text, context);
+                                      userLogin.login(
+                                        _emailController.text,
+                                        _passwordController.text,
+                                        context,
+                                      );
+                                      userLogin.addBool(false);
+                                      userLogin.setPassword(
+                                          _passwordController.text);
+                                      userLogin.setEmail(_emailController.text);
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MainPage(),
+                                        ),
+                                        (route) => false,
+                                      );
                                     }
                                   }),
                               const SizedBox(
@@ -293,7 +309,7 @@ class _LoginPageState extends State<LoginPage> {
                                   children: [
                                     IconButton(
                                         onPressed: () {},
-                                        icon: const Icon(Icons.apple)),
+                                        icon: const Icon(Icons.g_mobiledata)),
                                     IconButton(
                                         onPressed: () {},
                                         icon: const Icon(Icons.facebook)),

@@ -9,10 +9,16 @@ class ProfileViewModel extends ChangeNotifier {
   String get email => _email;
   String get password => _password;
 
+  Future<void> addBool(bool a) async {
+    logindata = await SharedPreferences.getInstance();
+    logindata.setBool('login', a);
+    notifyListeners();
+  }
+
   Future<void> initial() async {
     logindata = await SharedPreferences.getInstance();
-    _email = logindata.getString('username').toString();
-    _password = logindata.getString('email').toString();
+    _email = logindata.getString('email').toString();
+    _password = logindata.getString('password').toString();
     notifyListeners();
   }
 
