@@ -15,13 +15,6 @@ class MetodeVA extends StatefulWidget {
 enum VA { BNI, BCA, BRI, Mandiri, CIMB }
 
 class _MetodeVAState extends State<MetodeVA> {
-  @override
-  void initState() {
-    final bankProvider = Provider.of<BankViewModel>(context, listen: false);
-    bankProvider.getAllBank();
-    super.initState();
-  }
-
   VA? radioValue;
 
   bool isButtonActive = true;

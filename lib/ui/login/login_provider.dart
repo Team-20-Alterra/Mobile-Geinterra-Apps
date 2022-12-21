@@ -15,6 +15,10 @@ class LoginProvider extends ChangeNotifier {
 
   LoginProvider(this.pref);
 
+  Future<bool> getStateLogin() async {
+    return await pref.isLogin;
+  }
+
   Future<dynamic> login(String email, String password) async {
     state = ResultState.Loading;
     notifyListeners();
@@ -28,6 +32,7 @@ class LoginProvider extends ChangeNotifier {
       responseLogin = await _service.login(bodyLogin);
       pref.setToken(responseLogin.data.token);
       state = ResultState.Success;
+      pref.setIsLogin(true);
       notifyListeners();
     } on DioError catch (e) {
       message = e.message;

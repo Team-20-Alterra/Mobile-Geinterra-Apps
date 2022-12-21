@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:geinterra_apps/data/model/Response_invoices.dart';
-import 'package:geinterra_apps/data/model/bank_model.dart';
 import 'package:geinterra_apps/data/model/register_model.dart';
+import 'package:geinterra_apps/data/model/response_banks.dart';
 import 'package:geinterra_apps/data/model/response_login.dart';
 
 class ApiService {
@@ -56,15 +56,21 @@ class ApiService {
     }
   }
 
-  static Future<BankModel> getAllBank() async {
-    final dio = Dio();
-    dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
+  Future<ResponseBanks> getAllBank(token) async {
+    try {
+      var response = await _dio.get(
+        "${_baseUrl}banks",
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $token",
+          },
+        ),
+      );
 
-    final response = await dio.get(
-        'http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/banks');
-
-    final results = BankModel.fromJson(response.data);
-
-    return results;
+      return ResponseBanks.fromJson(response.data);
+    } on DioError catch (ex) {
+      String errorMessage = json.decode(ex.response.toString());
+      throw Exception(errorMessage);
+    }
   }
 }
