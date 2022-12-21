@@ -15,14 +15,13 @@ class ApiService {
     _dio.interceptors.add(LogInterceptor());
   }
 
-  Future<ResponseInvoices> fetchInvoice() async {
+  Future<ResponseInvoices> fetchInvoice(String token) async {
     try {
       var response = await _dio.get(
         "${_baseUrl}invoices",
         options: Options(
           headers: {
-            "Authorization":
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiY2hvc3Rpbmc2M0BnbWFpbC5jb20iLCJyb2xlIjoiQWRtaW4iLCJleHAiOjE2NzExMDU1MTV9.D7N8yDHCPLZ1WCCN_10tvwG2CyJX1hmjZqfryhhLoHU",
+            "Authorization": "Bearer $token",
           },
         ),
       );
@@ -57,12 +56,17 @@ class ApiService {
     }
   }
 
-  static Future<BankModel> getAllBank() async {
+  static Future<BankModel> getAllBank(String token) async {
     final dio = Dio();
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
-
     final response = await dio.get(
-        'http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/banks');
+      'http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/banks',
+      options: Options(
+        headers: {
+          "Authorization": "Bearer $token",
+        },
+      ),
+    );
 
     final results = BankModel.fromJson(response.data);
 

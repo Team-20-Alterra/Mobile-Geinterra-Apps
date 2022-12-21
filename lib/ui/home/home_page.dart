@@ -14,61 +14,58 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: SafeArea(
-        child: ListView(
-          children: [
-            _header(context),
-            const SizedBox(
-              height: 24,
-            ),
-            _articel(context),
-            const SizedBox(
-              height: 16,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 16, right: 16),
-              child: TitleSection(title: 'Transaksi belum dibayar'),
-            ),
-            Consumer<HomeProvider>(
-              builder: (contex, provider, _) {
-                switch (provider.state) {
-                  case ResultState.Success:
-                    if (provider.list.isEmpty) {
-                      return _emptyView(context);
-                    } else {
-                      return ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: provider.list.length,
-                        itemBuilder: (context, position) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 16),
-                            child: ItemTransaction(
-                              invoice: provider.list[position],
-                            ),
-                          );
-                        },
-                        padding: const EdgeInsets.all(16),
-                      );
-                    }
-                  case ResultState.Loading:
-                    return const SizedBox(
-                      height: 400,
-                      width: double.infinity,
-                      child: Center(child: CircularProgressIndicator()),
+    return SafeArea(
+      child: ListView(
+        children: [
+          _header(context),
+          const SizedBox(
+            height: 24,
+          ),
+          _articel(context),
+          const SizedBox(
+            height: 16,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
+            child: TitleSection(title: 'Transaksi belum dibayar'),
+          ),
+          Consumer<HomeProvider>(
+            builder: (contex, provider, _) {
+              switch (provider.state) {
+                case ResultState.Success:
+                  if (provider.list.isEmpty) {
+                    return _emptyView(context);
+                  } else {
+                    return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      physics: const ClampingScrollPhysics(),
+                      itemCount: provider.list.length,
+                      itemBuilder: (context, position) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 16),
+                          child: ItemTransaction(
+                            invoice: provider.list[position],
+                          ),
+                        );
+                      },
+                      padding: const EdgeInsets.all(16),
                     );
-                  case ResultState.Error:
-                    return Center(child: Text(provider.message));
-                  default:
-                    return const SizedBox();
-                }
-              },
-            ),
-          ],
-        ),
+                  }
+                case ResultState.Loading:
+                  return const SizedBox(
+                    height: 400,
+                    width: double.infinity,
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                case ResultState.Error:
+                  return Center(child: Text(provider.message));
+                default:
+                  return const SizedBox();
+              }
+            },
+          ),
+        ],
       ),
     );
   }
