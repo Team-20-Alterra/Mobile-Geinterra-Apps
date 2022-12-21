@@ -19,6 +19,8 @@ import '../pembayaran/metode/metode_va.dart';
 
 MaterialPageRoute? configRouters(RouteSettings settings) {
   switch (settings.name) {
+    case MainPage.routeName:
+      return MaterialPageRoute(builder: (_) => const MainPage());
     case RegisterPage.routeName:
       return MaterialPageRoute(builder: (_) => const RegisterPage());
     case LoginPage.routeName:
@@ -37,8 +39,6 @@ MaterialPageRoute? configRouters(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const VersionPage());
     case OnboardingPage.routeName:
       return MaterialPageRoute(builder: (_) => const OnboardingPage());
-    case MainPage.routeName:
-      return MaterialPageRoute(builder: (_) => const MainPage());
     case DetailInvoice.routeName:
       return MaterialPageRoute(builder: (_) => const DetailInvoice());
     case DetailPembayaran.routeName:

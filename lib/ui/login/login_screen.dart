@@ -41,6 +41,14 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     provider = context.watch<LoginProvider>();
+    provider.getStateLogin().then((value) {
+      if (value) {
+        debugPrint(value.toString());
+        Navigator.pushReplacementNamed(context, MainPage.routeName);
+      }
+    }, onError: (e) {
+      print(e);
+    });
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -125,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                                       border: InputBorder.none),
                                   validator: Validators.compose([
                                     Validators.required(
-                                        'email tidak boleh kosong'),
+                                        'password tidak boleh kosong'),
                                   ]),
                                 ),
                               ),
@@ -309,7 +317,7 @@ class _LoginPageState extends State<LoginPage> {
                                   children: [
                                     IconButton(
                                         onPressed: () {},
-                                        icon: const Icon(Icons.apple)),
+                                        icon: const Icon(Icons.g_mobiledata)),
                                     IconButton(
                                         onPressed: () {},
                                         icon: const Icon(Icons.facebook)),
@@ -345,18 +353,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Future<void> _showProgresDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
     );
   }
 }

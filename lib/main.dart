@@ -38,7 +38,8 @@ class MyApp extends StatelessWidget {
           create: (_) => ProfileViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (_) => BankViewModel(),
+          create: (_) => BankViewModel(
+              SharedPref(sharedpref: SharedPreferences.getInstance())),
         ),
       ],
       child: MaterialApp(
