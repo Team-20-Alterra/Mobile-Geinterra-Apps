@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:geinterra_apps/data/model/Response_invoices.dart';
-import 'package:geinterra_apps/data/model/bank_model.dart';
-import 'package:geinterra_apps/data/model/login_model.dart';
 import 'package:geinterra_apps/data/model/register_model.dart';
+import 'package:geinterra_apps/data/model/response_banks.dart';
+import 'package:geinterra_apps/data/model/response_login.dart';
 
 class ApiService {
   final String _baseUrl =
@@ -45,28 +45,23 @@ class ApiService {
     }
   }
 
-  Future<LoginModel> loginUser(Map<String, dynamic> userLogin) async {
+  Future<ResponseLogin> login(Map<String, String> loginBody) async {
     try {
-      var response = await _dio.post("${_baseUrl}login", data: userLogin);
+      var response = await _dio.post("${_baseUrl}login", data: loginBody);
 
-      return LoginModel.fromJson(response.data);
+      return ResponseLogin.fromJson(response.data);
     } on DioError catch (e) {
       String errorMessage = json.decode(e.response.toString())["errorMessage"];
       throw Exception(errorMessage);
     }
   }
 
-  static Future<BankModel> getAllBank(String token) async {
+  static Future<BankModel> getAllBank() async {
     final dio = Dio();
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
+
     final response = await dio.get(
-      'http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/banks',
-      options: Options(
-        headers: {
-          "Authorization": "Bearer $token",
-        },
-      ),
-    );
+        'http://ec2-18-181-241-210.ap-northeast-1.compute.amazonaws.com:8000/api/v1/banks');
 
     final results = BankModel.fromJson(response.data);
 

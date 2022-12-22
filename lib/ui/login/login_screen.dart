@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geinterra_apps/providers/login_view_model.dart';
 import 'package:geinterra_apps/ui/login/provider/login_provider.dart';
 import 'package:geinterra_apps/ui/login/widgets/rounded_button.dart';
 import 'package:geinterra_apps/ui/login/widgets/text_field_container.dart';
@@ -23,11 +22,14 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  final GlobalKey<State> _keyLoader = GlobalKey<State>();
   bool _passwordInVisible = true;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _forgotPasswordController =
       TextEditingController();
+
+  late LoginProvider provider;
 
   @override
   void dispose() {
@@ -38,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final userLogin = Provider.of<LoginViewModel>(context, listen: false);
+    final userLogin = Provider.of<LoginProvider>(context, listen: false);
     userLogin.checkLogin(context);
 
     Size size = MediaQuery.of(context).size;
@@ -50,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
           child: SingleChildScrollView(
             child: Stack(
               children: [
-                Upside(imgUrl: 'assets/login.jpg'),
+                const Upside(imgUrl: 'assets/login.jpg'),
                 const PageTitleBar(title: 'LOGIN'),
                 Padding(
                   padding: const EdgeInsets.only(top: 320.0),
@@ -98,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                                 child: TextFormField(
                                   controller: _passwordController,
                                   obscureText: _passwordInVisible,
-                                  cursorColor: Color(0xff297061),
+                                  cursorColor: const Color(0xff297061),
                                   decoration: InputDecoration(
                                       icon: const Icon(
                                         Icons.lock_outline,
@@ -205,8 +207,6 @@ class _LoginPageState extends State<LoginPage> {
                                                           Navigator.of(context)
                                                               .pop();
                                                         },
-                                                        child:
-                                                            const Text('Batal'),
                                                         style: ButtonStyle(
                                                             foregroundColor:
                                                                 MaterialStateProperty.all(
@@ -214,15 +214,16 @@ class _LoginPageState extends State<LoginPage> {
                                                                         .white),
                                                             backgroundColor:
                                                                 MaterialStateProperty.all(
-                                                                    Color(
+                                                                    const Color(
                                                                         0xff498679)),
                                                             shape: MaterialStateProperty.all<
                                                                     RoundedRectangleBorder>(
                                                                 RoundedRectangleBorder(
                                                                     borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            15),
-                                                                    side: BorderSide(color: Color(0xff297061))))),
+                                                                        BorderRadius.circular(15),
+                                                                    side: const BorderSide(color: Color(0xff297061))))),
+                                                        child:
+                                                            const Text('Batal'),
                                                       ),
                                                     ),
                                                     const SizedBox(
@@ -234,8 +235,6 @@ class _LoginPageState extends State<LoginPage> {
                                                           Navigator.of(context)
                                                               .pop();
                                                         },
-                                                        child:
-                                                            const Text('Kirim'),
                                                         style: ButtonStyle(
                                                             foregroundColor:
                                                                 MaterialStateProperty.all(
@@ -243,15 +242,16 @@ class _LoginPageState extends State<LoginPage> {
                                                                         .white),
                                                             backgroundColor:
                                                                 MaterialStateProperty.all(
-                                                                    Color(
+                                                                    const Color(
                                                                         0xff297061)),
                                                             shape: MaterialStateProperty.all<
                                                                     RoundedRectangleBorder>(
                                                                 RoundedRectangleBorder(
                                                                     borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            15),
-                                                                    side: BorderSide(color: Colors.white)))),
+                                                                        BorderRadius.circular(15),
+                                                                    side: const BorderSide(color: Colors.white)))),
+                                                        child:
+                                                            const Text('Kirim'),
                                                       ),
                                                     )
                                                   ],
@@ -277,24 +277,25 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               RoundedButton(
                                   text: 'Masuk',
-                                  press: () {
+                                  press: () async {
                                     if (_formKey.currentState!.validate()) {
-                                      userLogin.login(
-                                        _emailController.text,
-                                        _passwordController.text,
-                                        context,
-                                      );
-                                      userLogin.addBool(false);
-                                      userLogin.setPassword(
-                                          _passwordController.text);
-                                      userLogin.setEmail(_emailController.text);
-                                      Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => MainPage(),
-                                        ),
-                                        (route) => false,
-                                      );
+                                      try {
+                                        Dialogs.showLoadingDialog(
+                                            context, _keyLoader);
+
+                                        await provider.login(
+                                            _emailController.text,
+                                            _passwordController.text);
+
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop();
+
+                                        Navigator.pushNamed(
+                                            context, MainPage.routeName);
+                                      } catch (error) {
+                                        debugPrint(error.toString());
+                                      }
                                     }
                                   }),
                               const SizedBox(
@@ -347,5 +348,29 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+}
+
+class Dialogs {
+  static Future<void> showLoadingDialog(
+      BuildContext context, GlobalKey key) async {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return WillPopScope(
+              onWillPop: () async => false,
+              child: SimpleDialog(key: key, children: <Widget>[
+                Center(
+                  child: Column(children: const [
+                    CircularProgressIndicator(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text("Please Wait....")
+                  ]),
+                )
+              ]));
+        });
   }
 }
