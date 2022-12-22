@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:geinterra_apps/data/model/Response_invoices.dart';
+import 'package:geinterra_apps/data/model/invoice_model.dart';
 import 'package:geinterra_apps/data/model/notif_model.dart';
 import 'package:geinterra_apps/data/model/register_model.dart';
 import 'package:geinterra_apps/data/model/response_banks.dart';
@@ -75,18 +76,23 @@ class ApiService {
     }
   }
 
-  // Future<PaidModel> getAllSuccess(String id) async {
-  //   try {
-  //     var response = await _dio.get(
-  //       "${_baseUrl}/invoices/$id",
-  //     );
+  Future<InvoiceModel> getAllKonfirm(String token) async {
+    try {
+      var response = await _dio.get(
+        "${_baseUrl}invoices/status/konfir",
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $token",
+          },
+        ),
+      );
 
-  //     return PaidModel.fromJson(response.data);
-  //   } on DioError catch (ex) {
-  //     String errorMessage = json.decode(ex.response.toString());
-  //     throw Exception(errorMessage);
-  //   }
-  // }
+      return InvoiceModel.fromJson(response.data);
+    } on DioError catch (ex) {
+      String errorMessage = json.decode(ex.response.toString());
+      throw Exception(errorMessage);
+    }
+  }
 
   Future<NotifModel> getAllNotif(String token) async {
     try {
