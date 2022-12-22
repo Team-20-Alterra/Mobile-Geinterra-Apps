@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geinterra_apps/data/model/bank_model.dart';
+import 'package:geinterra_apps/data/model/response_banks.dart';
 import 'package:geinterra_apps/data/remote/api_service.dart';
 
 import '../data/local/shared_pref.dart';
@@ -21,6 +21,17 @@ class BankViewModel with ChangeNotifier {
   }
 
   BankViewState get state => _state;
+  String? codeBank;
+
+  void clearState() {
+    codeBank = null;
+    notifyListeners();
+  }
+
+  void setCodeBank(String code) {
+    codeBank = code;
+    notifyListeners();
+  }
 
   changeState(BankViewState s) {
     _state = s;
@@ -35,7 +46,8 @@ class BankViewModel with ChangeNotifier {
     changeState(BankViewState.loading);
 
     try {
-      final c = await ApiService.getAllBank();
+      var token = await pref.token;
+      final c = await service.getAllBank(token);
       _bankModel = c;
 
       changeState(BankViewState.success);

@@ -15,25 +15,16 @@ class MetodeBank extends StatefulWidget {
   State<MetodeBank> createState() => _MetodeBankState();
 }
 
-// List<BankModel> data = new List();
-
-enum MBank { $name, $logo, $iD }
-
 class _MetodeBankState extends State<MetodeBank> {
-  get data => null;
+  late BankViewModel provider;
 
   @override
-  void initState() {
-    final bankProvider = Provider.of<BankViewModel>(context, listen: false);
-    bankProvider.getAllBank();
-    super.initState();
+  void dispose() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      provider.clearState();
+    });
+    super.dispose();
   }
-
-  Bank? bank;
-
-  final bankModel = BankModel();
-
-  bool isButtonActive = true;
 
   @override
   Widget build(BuildContext context) {
@@ -70,108 +61,110 @@ class _MetodeBankState extends State<MetodeBank> {
             const SizedBox(
               height: 16,
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                'Total Harga',
+                style: regular16pt.copyWith(color: textBlack),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                'Rp. 37.000',
+                style: heading10.copyWith(color: textBlack),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              width: double.infinity,
+              height: size.height * 0.06,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: ElevatedButton(
+                  onPressed: provider.codeBank != null
+                      ? () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DetailPembayaran(),
+                            ),
+                          );
+                        }
+                      : null,
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: primaryGreen),
+                  child: Text(
+                    'Lanjutkan',
+                    style: semibold16pt.copyWith(color: textWhite),
+                  ),
+                ),
+              ),
+            ),
           ],
+        ));
+  }
+
+  Widget _showList(BankViewModel provider) {
+    switch (provider.state) {
+      case BankViewState.loading:
+        return const Center(child: CircularProgressIndicator());
+      case BankViewState.success:
+        var data = provider.bankModel!.data;
+        return ListView.builder(
+          padding: const EdgeInsets.all(16),
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                _itemViewBank(provider, data[index]),
+                const SizedBox(
+                  height: 16,
+                )
+              ],
+            );
+          },
+        );
+      case BankViewState.error:
+        return const Text('error');
+      case BankViewState.none:
+        return const SizedBox();
+    }
+  }
+
+  Widget _itemViewBank(BankViewModel provider, Bank bank) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+          color: primaryGrey,
+        ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(18.0),
         ),
       ),
-      body: isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.separated(
-              separatorBuilder: (context, index) => Divider(
-                color: Colors.green,
-              ),
-              itemCount: data == null ? 0 : data.length,
-              itemBuilder: (BuildContext context, i) {
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // BNI
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                            color: primaryGrey,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(18.0),
-                          ),
-                        ),
-                        child: RadioListTile<MBank>(
-                          secondary: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16.0),
-                              image: DecorationImage(
-                                image: NetworkImage(bank!.logo!),
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                          ),
-                          controlAffinity: ListTileControlAffinity.trailing,
-                          value: MBank.$iD,
-                          groupValue: data[i].selectedValue,
-                          onChanged: (value) {
-                            setState(
-                              () {
-                                bank = value as Bank?;
-                              },
-                            );
-                          },
-                          activeColor: primaryGreen,
-                          title: Text(
-                            bank!.name!,
-                            style: semibold16pt.copyWith(color: textBlack),
-                          ),
-                        ),
-                      ),
-                      Spacer(),
-                      Text(
-                        'Total Harga',
-                        style: regular16pt.copyWith(color: textBlack),
-                      ),
-                      Text(
-                        'Rp. 37.000',
-                        style: heading10.copyWith(color: textBlack),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        width: double.infinity,
-                        height: size.height * 0.06,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: ElevatedButton(
-                            onPressed: bank != null
-                                ? () {
-                                    if (isButtonActive) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              DetailPembayaran(),
-                                        ),
-                                      );
-                                    }
-                                  }
-                                : null,
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: primaryGreen),
-                            child: Text(
-                              'Lanjutkan',
-                              style: semibold16pt.copyWith(color: textWhite),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+      child: RadioListTile<String>(
+        secondary: Container(
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(bank.logo),
+              fit: BoxFit.contain,
             ),
+          ),
+        ),
+        controlAffinity: ListTileControlAffinity.trailing,
+        value: bank.id.toString(),
+        groupValue: provider.codeBank,
+        onChanged: (value) => provider.setCodeBank(value.toString()),
+        activeColor: primaryGreen,
+        title: Text(
+          bank.name,
+          style: semibold16pt.copyWith(color: textBlack),
+        ),
+      ),
     );
   }
 }

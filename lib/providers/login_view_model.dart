@@ -25,7 +25,7 @@ class LoginViewModel extends ChangeNotifier {
 
     //get response from ApiClient
     try {
-      final res = await apiService.loginUser(userLogin);
+      final res = await apiService.login(userLogin);
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => MainPage()));
     } catch (e) {

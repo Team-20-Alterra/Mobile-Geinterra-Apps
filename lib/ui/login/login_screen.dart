@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geinterra_apps/ui/login/provider/login_provider.dart';
+import 'package:geinterra_apps/ui/login/login_provider.dart';
 import 'package:geinterra_apps/ui/login/widgets/rounded_button.dart';
 import 'package:geinterra_apps/ui/login/widgets/text_field_container.dart';
 import 'package:geinterra_apps/ui/register/register_page.dart';
@@ -40,9 +40,15 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final userLogin = Provider.of<LoginProvider>(context, listen: false);
-    userLogin.checkLogin(context);
-
+    provider = context.watch<LoginProvider>();
+    provider.getStateLogin().then((value) {
+      if (value) {
+        debugPrint(value.toString());
+        Navigator.pushReplacementNamed(context, MainPage.routeName);
+      }
+    }, onError: (e) {
+      print(e);
+    });
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
