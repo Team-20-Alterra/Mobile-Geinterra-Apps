@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geinterra_apps/data/model/Response_invoices.dart';
+import 'package:geinterra_apps/data/model/invoice_model.dart';
+import 'package:geinterra_apps/theme.dart';
 import 'package:geinterra_apps/ui/widgets/title_description.dart';
 import 'package:geinterra_apps/ui/widgets/title_item.dart';
 
@@ -24,37 +26,37 @@ class ItemTransaction extends StatelessWidget {
           const SizedBox(
             width: 12,
           ),
-          Expanded(
-            flex: 1,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const TitleItem(title: "Semabarang"),
-                    const Expanded(
-                      flex: 1,
-                      child: SizedBox(),
-                    ),
-                    TitleItem(title: invoice.price.toString()),
-                  ],
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  children: [
-                    TitleDescription(title: invoice.noInvoice),
-                    const Expanded(
-                      flex: 1,
-                      child: SizedBox(),
-                    ),
-                    TitleDescription(title: invoice.status),
-                  ],
-                )
-              ],
-            ),
-          )
+          // Expanded(
+          //   flex: 1,
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       Row(
+          //         children: [
+          //           const TitleItem(title: "Semabarang"),
+          //           const Expanded(
+          //             flex: 1,
+          //             child: SizedBox(),
+          //           ),
+          //           TitleItem(title: invoice.price.toString()),
+          //         ],
+          //       ),
+          //       const SizedBox(
+          //         height: 8,
+          //       ),
+          //       Row(
+          //         children: [
+          //           TitleDescription(title: invoice.noInvoice),
+          //           const Expanded(
+          //             flex: 1,
+          //             child: SizedBox(),
+          //           ),
+          //           TitleDescription(title: invoice.status),
+          //         ],
+          //       )
+          //     ],
+          //   ),
+          // )
         ],
       ),
     );

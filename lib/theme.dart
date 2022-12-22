@@ -8,7 +8,9 @@ Color textWhite = Colors.white;
 Color primaryGreen = Color(0xff297061);
 Color primaryGrey = Colors.grey;
 Color button = Color(0xD9D9D9);
-Color primaryEror = Color(0xFFFFA726);
+Color primaryEror = Color(0xffE5644A);
+Color primaryError6 = Color(0xffE04526);
+Color textGreen = Color(0xff37BA44);
 
 // Bold
 TextStyle heading10 = GoogleFonts.poppins(
@@ -50,6 +52,11 @@ TextStyle regular14pt = GoogleFonts.poppins(
 
 TextStyle regular12pt = GoogleFonts.poppins(
   fontSize: 12,
+  fontWeight: FontWeight.w400,
+);
+
+TextStyle regular11pt = GoogleFonts.poppins(
+  fontSize: 11,
   fontWeight: FontWeight.w400,
 );
 

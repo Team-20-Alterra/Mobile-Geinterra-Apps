@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:geinterra_apps/data/model/invoice_model.dart';
+import 'package:geinterra_apps/theme.dart';
 import 'package:geinterra_apps/ui/home/provider/home_provider.dart';
-import 'package:geinterra_apps/ui/home/widgets/item_invoice.dart';
-import 'package:geinterra_apps/ui/home/widgets/shape_icon.dart';
 import 'package:geinterra_apps/ui/notification/notif.dart';
-import 'package:geinterra_apps/ui/pembayaran/metode/metode_pembayaran.dart';
 import 'package:geinterra_apps/ui/widgets/circle_img_asset.dart';
 import 'package:geinterra_apps/ui/widgets/title_section.dart';
 import 'package:provider/provider.dart';
 
 import '../utils/result_state.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
+    final homeProvider = Provider.of<HomeProvider>(context, listen: true);
+    final listHome = homeProvider.invoice;
+
     return SafeArea(
       child: ListView(
         children: [
@@ -30,6 +37,11 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.only(left: 16, right: 16),
             child: TitleSection(title: 'Transaksi belum dibayar'),
           ),
+          // ListView.builder(
+          //     itemCount: 20,
+          //     itemBuilder: (context, index) {
+          //       return _buildstatus(listHome?.invoices?[index], context);
+          //     })
           Consumer<HomeProvider>(
             builder: (contex, provider, _) {
               switch (provider.state) {
@@ -41,14 +53,15 @@ class HomePage extends StatelessWidget {
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       physics: const ClampingScrollPhysics(),
-                      itemCount: provider.list.length,
+                      itemCount: 5,
                       itemBuilder: (context, position) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
-                          child: ItemTransaction(
-                            invoice: provider.list[position],
-                          ),
-                        );
+                        return _buildstatus(listHome?.data?[position], context);
+                        // return Padding(
+                        //   padding: const EdgeInsets.only(bottom: 16),
+                        //   child: ItemTransaction(
+                        //     invoice: provider.list[position],
+                        //   ),
+                        // );
                       },
                       padding: const EdgeInsets.all(16),
                     );
@@ -65,6 +78,60 @@ class HomePage extends StatelessWidget {
                   return const SizedBox();
               }
             },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildstatus(Data? data, BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Image(
+            alignment: Alignment.topLeft,
+            image: AssetImage(
+              'assets/item_img.png',
+            ),
+            width: 56,
+            height: 56,
+          ),
+          SizedBox(
+            width: 16.0,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Geprek Bensu Wakanda',
+                      style: medium12pt.copyWith(color: textBlack),
+                    ),
+                    Text(
+                      'Rp37.000',
+                      style: medium12pt.copyWith(color: textBlack),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'No. Invoice',
+                      style: regular11pt.copyWith(color: textBlack),
+                    ),
+                    Text(
+                      'Menunggu  Konfirmasi',
+                      style: regular11pt.copyWith(color: primaryError6),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -116,9 +183,11 @@ class HomePage extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                    width: 135,
-                    height: 150,
+                    width: 160,
+                    height: 110,
                     decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/gambar1.png')),
                         shape: BoxShape.rectangle,
                         color: Colors.grey,
                         borderRadius: BorderRadius.all(Radius.circular(16)))),
@@ -126,9 +195,11 @@ class HomePage extends StatelessWidget {
                   width: 8,
                 ),
                 Container(
-                    width: 135,
-                    height: 150,
+                    width: 160,
+                    height: 110,
                     decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/gambar2.png')),
                         shape: BoxShape.rectangle,
                         color: Colors.grey,
                         borderRadius: BorderRadius.all(Radius.circular(16)))),
@@ -136,9 +207,11 @@ class HomePage extends StatelessWidget {
                   width: 8,
                 ),
                 Container(
-                    width: 135,
-                    height: 150,
+                    width: 160,
+                    height: 110,
                     decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/gambar1.png')),
                         shape: BoxShape.rectangle,
                         color: Colors.grey,
                         borderRadius: BorderRadius.all(Radius.circular(16)))),
@@ -146,19 +219,11 @@ class HomePage extends StatelessWidget {
                   width: 8,
                 ),
                 Container(
-                    width: 135,
-                    height: 150,
+                    width: 160,
+                    height: 110,
                     decoration: const BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.all(Radius.circular(16)))),
-                const SizedBox(
-                  width: 8,
-                ),
-                Container(
-                    width: 135,
-                    height: 150,
-                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/gambar2.png')),
                         shape: BoxShape.rectangle,
                         color: Colors.grey,
                         borderRadius: BorderRadius.all(Radius.circular(16)))),
@@ -212,8 +277,6 @@ class HomePage extends StatelessWidget {
               minimumSize: MaterialStateProperty.all(const Size(60, 60)),
             ),
           ),
-          // const ShapeIcon(
-          //     width: 60, height: 60, icon: Icons.notifications_outlined)
         ],
       ),
     );

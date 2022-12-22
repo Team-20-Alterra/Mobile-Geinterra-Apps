@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:geinterra_apps/data/model/invoice_model.dart';
 import 'package:geinterra_apps/data/remote/api_service.dart';
 import 'package:geinterra_apps/ui/utils/result_state.dart';
 
@@ -16,6 +17,9 @@ class HomeProvider extends ChangeNotifier {
   HomeProvider(this.pref) {
     _getListInvoice();
   }
+
+  InvoiceModel? _invoice;
+  InvoiceModel? get invoice => _invoice;
 
   Future<dynamic> _getListInvoice() async {
     state = ResultState.Loading;
