@@ -6,8 +6,22 @@ import 'package:geinterra_apps/ui/utils/colors.dart';
 import '../utils/custom_indicator.dart';
 import 'unpaid/unpaid_page.dart';
 
-class BillPage extends StatelessWidget {
-  const BillPage({Key? key}) : super(key: key);
+class BillPage extends StatefulWidget {
+  const BillPage({super.key});
+
+  @override
+  State<BillPage> createState() => _BillPageState();
+}
+
+class _BillPageState extends State<BillPage>
+    with SingleTickerProviderStateMixin {
+  TabController? _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +35,8 @@ class BillPage extends StatelessWidget {
           children: <Widget>[
             TabBar(
                 tabs: const <Widget>[
-                  MyTab(title: 'Belum Bayar'),
-                  MyTab(title: 'Sudah Bayar'),
+                  MyTab(title: 'Transaksi'),
+                  MyTab(title: 'Selesai'),
                 ],
                 indicatorColor: MyColors.greenColor,
                 indicatorWeight: 4,

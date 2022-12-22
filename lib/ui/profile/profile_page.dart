@@ -41,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: Colors.white,
                           shape: BoxShape.circle,
                           image: const DecorationImage(
-                            image: AssetImage('assets/profile.jpg'),
+                            image: AssetImage('assets/icon_user.jpg'),
                             fit: BoxFit.cover,
                           ),
                           border: Border.all(

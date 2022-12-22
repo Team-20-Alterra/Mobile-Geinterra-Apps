@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geinterra_apps/providers/bank_view_model.dart';
+import 'package:geinterra_apps/providers/notif_view_model.dart';
 import 'package:geinterra_apps/providers/profile_view_model.dart';
 import 'package:geinterra_apps/providers/register_view_model.dart';
 import 'package:geinterra_apps/ui/home/provider/home_provider.dart';
@@ -39,6 +40,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => BankViewModel(
+              SharedPref(sharedpref: SharedPreferences.getInstance())),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => NotifViewModel(
               SharedPref(sharedpref: SharedPreferences.getInstance())),
         ),
       ],

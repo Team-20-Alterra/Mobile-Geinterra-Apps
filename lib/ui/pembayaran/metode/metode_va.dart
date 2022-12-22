@@ -54,262 +54,118 @@ class _MetodeVAState extends State<MetodeVA> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // BNI
-                  Container(
-                    width: double.infinity,
+          : ListView(
+              children: [
+                _itemBankView(),
+                SizedBox(
+                  height: size.height / 1.7,
+                ),
+                _buildElevatedButton(),
+              ],
+            ),
+    );
+  }
+
+  Widget _itemBankView() {
+    return Consumer<BankViewModel>(
+      builder: (context, provider, _) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // BNI
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: primaryGrey,
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(18.0),
+                  ),
+                ),
+                child: RadioListTile<VA>(
+                  secondary: Container(
+                    height: 40,
+                    width: 40,
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: primaryGrey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(18.0),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                            "https://upload.wikimedia.org/wikipedia/id/thumb/5/55/BNI_logo.svg/1200px-BNI_logo.svg.png"),
+                        fit: BoxFit.contain,
                       ),
                     ),
-                    child: RadioListTile<VA>(
-                      secondary: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                "https://upload.wikimedia.org/wikipedia/id/thumb/5/55/BNI_logo.svg/1200px-BNI_logo.svg.png"),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: VA.BNI,
-                      groupValue: radioValue,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            radioValue = value;
-                          },
-                        );
+                  ),
+                  controlAffinity: ListTileControlAffinity.trailing,
+                  value: VA.BNI,
+                  groupValue: radioValue,
+                  onChanged: (value) {
+                    setState(
+                      () {
+                        radioValue = value;
                       },
-                      activeColor: primaryGreen,
-                      title: Text(
-                        'BNI VA',
-                        style: semibold16pt.copyWith(color: textBlack),
-                      ),
-                    ),
+                    );
+                  },
+                  activeColor: primaryGreen,
+                  title: Text(
+                    'BNI VA',
+                    style: semibold16pt.copyWith(color: textBlack),
                   ),
-                  // BCA
-                  SizedBox(height: 16.0),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: primaryGrey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(18.0),
-                      ),
-                    ),
-                    child: RadioListTile<VA>(
-                      secondary: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          image: DecorationImage(
-                            image: AssetImage('assets/bca.jpg'),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: VA.BCA,
-                      groupValue: radioValue,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            radioValue = value;
-                          },
-                        );
-                      },
-                      activeColor: primaryGreen,
-                      title: Text(
-                        'BCA VA',
-                        style: semibold16pt.copyWith(color: textBlack),
-                      ),
-                    ),
-                  ),
-                  // BRI
-                  SizedBox(height: 16.0),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: primaryGrey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(18.0),
-                      ),
-                    ),
-                    child: RadioListTile<VA>(
-                      secondary: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                "https://i2.wp.com/febi.uinsaid.ac.id/wp-content/uploads/2020/11/Logo-BRI-Bank-Rakyat-Indonesia-PNG-Terbaru.png?ssl=1"),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: VA.BRI,
-                      groupValue: radioValue,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            radioValue = value;
-                          },
-                        );
-                      },
-                      activeColor: primaryGreen,
-                      title: Text(
-                        'BRI VA',
-                        style: semibold16pt.copyWith(color: textBlack),
-                      ),
-                    ),
-                  ),
-                  // Mandiri
-                  SizedBox(height: 16.0),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: primaryGrey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(18.0),
-                      ),
-                    ),
-                    child: RadioListTile<VA>(
-                      secondary: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          image: DecorationImage(
-                            image: AssetImage('assets/mandiri.png'),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: VA.Mandiri,
-                      groupValue: radioValue,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            radioValue = value;
-                          },
-                        );
-                      },
-                      activeColor: primaryGreen,
-                      title: Text(
-                        'Mandiri VA',
-                        style: semibold16pt.copyWith(color: textBlack),
-                      ),
-                    ),
-                  ),
-                  // CIMB
-                  SizedBox(height: 16.0),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: primaryGrey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(18.0),
-                      ),
-                    ),
-                    child: RadioListTile<VA>(
-                      secondary: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          image: DecorationImage(
-                            image: AssetImage('assets/CIMB.png'),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.trailing,
-                      value: VA.CIMB,
-                      groupValue: radioValue,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            radioValue = value;
-                          },
-                        );
-                      },
-                      activeColor: primaryGreen,
-                      title: Text(
-                        'CIMB VA',
-                        style: semibold16pt.copyWith(color: textBlack),
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  Text(
-                    'Total Harga',
-                    style: regular16pt.copyWith(color: textBlack),
-                  ),
-                  Text(
-                    'Rp. 37.000',
-                    style: heading10.copyWith(color: textBlack),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    width: double.infinity,
-                    height: size.height * 0.06,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: ElevatedButton(
-                        onPressed: radioValue != null
-                            ? () {
-                                if (isButtonActive) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailPembayaran(),
-                                    ),
-                                  );
-                                }
-                              }
-                            : null,
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: primaryGreen),
-                        child: Text(
-                          'Lanjutkan',
-                          style: semibold16pt.copyWith(color: textWhite),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildElevatedButton() {
+    Size size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Total Harga',
+            style: regular16pt.copyWith(color: textBlack),
+          ),
+          Text(
+            'Rp. 37.000',
+            style: heading10.copyWith(color: textBlack),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            width: double.infinity,
+            height: size.height * 0.06,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: ElevatedButton(
+                onPressed: radioValue != null
+                    ? () {
+                        if (isButtonActive) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailPembayaran(),
+                            ),
+                          );
+                        }
+                      }
+                    : null,
+                style: ElevatedButton.styleFrom(backgroundColor: primaryGreen),
+                child: Text(
+                  'Lanjutkan',
+                  style: semibold16pt.copyWith(color: textWhite),
+                ),
               ),
             ),
+          ),
+        ],
+      ),
     );
   }
 }
