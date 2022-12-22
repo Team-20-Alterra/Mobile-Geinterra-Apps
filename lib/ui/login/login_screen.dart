@@ -40,15 +40,17 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    provider = context.watch<LoginProvider>();
-    provider.getStateLogin().then((value) {
-      if (value) {
-        debugPrint(value.toString());
-        Navigator.pushReplacementNamed(context, MainPage.routeName);
-      }
-    }, onError: (e) {
-      print(e);
-    });
+    final userLogin = Provider.of<LoginProvider>(context, listen: false);
+    userLogin.checkLogin(context);
+    // provider = context.watch<LoginProvider>();
+    // provider.getStateLogin().then((value) {
+    //   if (value) {
+    //     debugPrint(value.toString());
+    //     Navigator.pushReplacementNamed(context, MainPage.routeName);
+    //   }
+    // }, onError: (e) {
+    //   print(e);
+    // });
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
