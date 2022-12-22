@@ -1,89 +1,109 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:geinterra_apps/data/model/notif_model.dart';
+import 'package:geinterra_apps/providers/notif_view_model.dart';
 import 'package:geinterra_apps/theme.dart';
+import 'package:provider/provider.dart';
 
-class NotifPage extends StatelessWidget {
+class NotifPage extends StatefulWidget {
   const NotifPage({super.key});
 
   @override
+  State<NotifPage> createState() => _NotifPageState();
+}
+
+class _NotifPageState extends State<NotifPage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Color(0xff297061),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Notifikasi',
-              style: heading6.copyWith(color: primaryGreen),
+    final notifProvider = Provider.of<NotifViewModel>(context, listen: true);
+
+    final listNotif = notifProvider.notif;
+    final isLoading = notifProvider.notif == NotifViewState.loading;
+    final isError = notifProvider.notif == NotifViewState.error;
+
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0.0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Color(0xff297061),
             ),
-          ],
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Notifikasi',
+                style: heading6.copyWith(color: primaryGreen),
+              ),
+            ],
+          ),
         ),
+        body: isLoading
+            ? Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                itemCount: listNotif?.data?.length,
+                itemBuilder: (context, index) {
+                  return _buildNotif(listNotif?.data?[index], context);
+                },
+              ),
       ),
-      body: SafeArea(
-          child: Column(
-        children: [
-          Expanded(
-              child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                      width: double.maxFinite,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 5),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Ada Tagihan Yang Perlu Dibayar!',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 17),
-                            ),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                            Text(
-                                'Resto A mengirimkanmu tagihan sebesar 1235XXXXX. Yuk bayar sebelum batas yang ditentukan!'),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.access_time_rounded,
-                                  size: 20,
-                                  color: Colors.grey,
-                                ),
-                                const SizedBox(
-                                  width: 2,
-                                ),
-                                Text('22 Nov 2022, ',
-                                    style: TextStyle(color: Colors.grey)),
-                                Text('13.00 WIB',
-                                    style: TextStyle(color: Colors.grey))
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  }))
-        ],
-      )),
+    );
+  }
+
+  Widget _buildNotif(Data? data, BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+          width: double.maxFinite,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  data!.title!,
+                  style: bold.copyWith(color: textBlack),
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
+                Text(
+                  data.body!,
+                  style: regular10pt.copyWith(color: textBlack),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.access_time,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
+                    SizedBox(
+                      width: 6.0,
+                    ),
+                    Text(
+                      data.createdAt!,
+                      style: regular10pt.copyWith(color: primaryGrey),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

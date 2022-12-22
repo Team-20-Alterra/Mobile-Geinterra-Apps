@@ -88,10 +88,15 @@ class ApiService {
   //   }
   // }
 
-  Future<NotifModel> getAllNotif(String id) async {
+  Future<NotifModel> getAllNotif(String token) async {
     try {
       var response = await _dio.get(
         "${_baseUrl}notif",
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $token",
+          },
+        ),
       );
 
       return NotifModel.fromJson(response.data);
