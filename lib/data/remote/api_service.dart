@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:geinterra_apps/data/model/Response_invoices.dart';
+import 'package:geinterra_apps/data/model/notif_model.dart';
 import 'package:geinterra_apps/data/model/register_model.dart';
 import 'package:geinterra_apps/data/model/response_banks.dart';
 import 'package:geinterra_apps/data/model/response_login.dart';
@@ -68,6 +69,32 @@ class ApiService {
       );
 
       return ResponseBanks.fromJson(response.data);
+    } on DioError catch (ex) {
+      String errorMessage = json.decode(ex.response.toString());
+      throw Exception(errorMessage);
+    }
+  }
+
+  // Future<PaidModel> getAllSuccess(String id) async {
+  //   try {
+  //     var response = await _dio.get(
+  //       "${_baseUrl}/invoices/$id",
+  //     );
+
+  //     return PaidModel.fromJson(response.data);
+  //   } on DioError catch (ex) {
+  //     String errorMessage = json.decode(ex.response.toString());
+  //     throw Exception(errorMessage);
+  //   }
+  // }
+
+  Future<NotifModel> getAllNotif(String id) async {
+    try {
+      var response = await _dio.get(
+        "${_baseUrl}notif",
+      );
+
+      return NotifModel.fromJson(response.data);
     } on DioError catch (ex) {
       String errorMessage = json.decode(ex.response.toString());
       throw Exception(errorMessage);
