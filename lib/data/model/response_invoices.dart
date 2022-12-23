@@ -39,7 +39,6 @@ class Invoice {
     required this.price,
     required this.payment,
     required this.type,
-    required this.statusInvoice,
     required this.status,
     required this.total,
     required this.subTotal,
@@ -54,7 +53,6 @@ class Invoice {
   int price;
   String payment;
   String type;
-  String statusInvoice;
   String status;
   int total;
   int subTotal;
@@ -69,7 +67,6 @@ class Invoice {
         price: json["price"],
         payment: json["payment"],
         type: json["type"],
-        statusInvoice: json["status_invoice"],
         status: json["status"],
         total: json["total"],
         subTotal: json["sub_total"],
@@ -85,7 +82,6 @@ class Invoice {
         "price": price,
         "payment": payment,
         "type": type,
-        "status_invoice": statusInvoice,
         "status": status,
         "total": total,
         "sub_total": subTotal,

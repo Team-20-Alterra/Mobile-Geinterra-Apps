@@ -4,6 +4,7 @@ import 'package:geinterra_apps/ui/widgets/my_button.dart';
 
 import '../../theme.dart';
 import '../pembayaran/metode/metode_pembayaran.dart';
+import '../utils/colors.dart';
 import '../widgets/circle_img_asset.dart';
 import '../widgets/my_appbar.dart';
 
@@ -15,9 +16,28 @@ class DetailInvoice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(title: "Detail Tagihan", back: () {
-        Navigator.pop(context);
-      }),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: MyColors.myGreen,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Detail Invoice',
+              style: heading6.copyWith(color: primaryGreen),
+            ),
+          ],
+        ),
+      ),
       body: Column(
         children: [
           Expanded(

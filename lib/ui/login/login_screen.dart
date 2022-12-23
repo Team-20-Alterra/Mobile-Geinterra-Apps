@@ -291,7 +291,17 @@ class _LoginPageState extends State<LoginPage> {
                                         Navigator.pushNamed(
                                             context, MainPage.routeName);
                                       } catch (error) {
+                                        var snackBar = SnackBar(
+                                          content:
+                                              Text(error.toString()),
+                                        );
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+
                                         debugPrint(error.toString());
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop();
                                       }
                                     }
                                   }),

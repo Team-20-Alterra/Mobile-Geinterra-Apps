@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:geinterra_apps/data/model/invoice_model.dart';
-import 'package:geinterra_apps/theme.dart';
 import 'package:geinterra_apps/ui/home/provider/home_provider.dart';
+import 'package:geinterra_apps/ui/home/widgets/item_invoice.dart';
 import 'package:geinterra_apps/ui/notification/notif.dart';
 import 'package:geinterra_apps/ui/widgets/circle_img_asset.dart';
 import 'package:geinterra_apps/ui/widgets/title_section.dart';
@@ -19,9 +18,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final homeProvider = Provider.of<HomeProvider>(context, listen: true);
-    final listHome = homeProvider.invoice;
-
     return SafeArea(
       child: ListView(
         children: [
@@ -37,11 +33,6 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.only(left: 16, right: 16),
             child: TitleSection(title: 'Transaksi belum dibayar'),
           ),
-          // ListView.builder(
-          //     itemCount: 20,
-          //     itemBuilder: (context, index) {
-          //       return _buildstatus(listHome?.invoices?[index], context);
-          //     })
           Consumer<HomeProvider>(
             builder: (contex, provider, _) {
               switch (provider.state) {
@@ -53,15 +44,11 @@ class _HomePageState extends State<HomePage> {
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       physics: const ClampingScrollPhysics(),
-                      itemCount: 5,
+                      itemCount: provider.list.length,
                       itemBuilder: (context, position) {
-                        return _buildstatus(listHome?.data?[position], context);
-                        // return Padding(
-                        //   padding: const EdgeInsets.only(bottom: 16),
-                        //   child: ItemTransaction(
-                        //     invoice: provider.list[position],
-                        //   ),
-                        // );
+                        return ItemTransaction(
+                          invoice: provider.list[position],
+                        );
                       },
                       padding: const EdgeInsets.all(16),
                     );
@@ -78,60 +65,6 @@ class _HomePageState extends State<HomePage> {
                   return const SizedBox();
               }
             },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildstatus(Data? data, BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16),
-      child: Row(
-        children: [
-          Image(
-            alignment: Alignment.topLeft,
-            image: AssetImage(
-              'assets/item_img.png',
-            ),
-            width: 56,
-            height: 56,
-          ),
-          SizedBox(
-            width: 16.0,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Geprek Bensu Wakanda',
-                      style: medium12pt.copyWith(color: textBlack),
-                    ),
-                    Text(
-                      'Rp37.000',
-                      style: medium12pt.copyWith(color: textBlack),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'No. Invoice',
-                      style: regular11pt.copyWith(color: textBlack),
-                    ),
-                    Text(
-                      'Menunggu  Konfirmasi',
-                      style: regular11pt.copyWith(color: primaryError6),
-                    ),
-                  ],
-                ),
-              ],
-            ),
           ),
         ],
       ),

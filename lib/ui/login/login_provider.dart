@@ -52,9 +52,8 @@ class LoginProvider extends ChangeNotifier {
   }
 
   Future<void> checkLogin(BuildContext context) async {
-    logindata = await SharedPreferences.getInstance();
-    _newUser = logindata.getBool('login') ?? true;
-    if (newUser == false) {
+    var login = await pref.isLogin;
+    if (login == true) {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -62,6 +61,5 @@ class LoginProvider extends ChangeNotifier {
           ),
           (route) => false);
     }
-    notifyListeners();
   }
 }
